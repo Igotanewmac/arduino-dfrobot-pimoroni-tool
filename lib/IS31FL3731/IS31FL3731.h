@@ -26,6 +26,7 @@
 #define IS31FL3731_PAGE_CONTROL 0x0B
 
 #define IS31FL3731_ADDRESS_CONFIG_REGISTER 0x00
+#define IS31FL3731_ADDRESS_PICTURE_DISPLAY_REG 0x01
 #define IS31FL3731_ADDRESS_SOFTWARESHUTDOWN 0x0A
 
 
@@ -92,7 +93,15 @@ public:
     uint8_t modeget();
 
 
-    
+    /// @brief Set the current frame number to display.
+    /// @param frame the number of the frame to display.  0-7.
+    void frameset( uint8_t frame );
+
+    /// @brief returns the current frame number from the chip.
+    uint8_t frameget();
+
+
+
 
 };
 

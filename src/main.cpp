@@ -147,18 +147,22 @@ void menucommand_02() {
 
 
   // Picture Display Mode
-  
+  /*
   lcd.print( "PD: " );
   lcd.print( myledmatrix.modeget() );
   lcd.print( ":" );
   myledmatrix.modeset( 0 );
   lcd.print( myledmatrix.modeget() );
   while (1);
+  */
+
+  // Set to picture display mode
+  myledmatrix.modeset( 0 );
+
+
+
+
   
-
-  // turn off software shutdown mode
-  //myledmatrix.shutdownset( 1 );
-
 
 };
 
