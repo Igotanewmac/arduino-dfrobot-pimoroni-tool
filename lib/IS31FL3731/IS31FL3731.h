@@ -91,6 +91,9 @@ public:
     /// @brief Gets the current mode from the chip.
     uint8_t modeget();
 
+
+    
+
 };
 
 

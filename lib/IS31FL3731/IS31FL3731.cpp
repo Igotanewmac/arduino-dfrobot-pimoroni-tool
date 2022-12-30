@@ -63,6 +63,7 @@ uint8_t IS31FL3731::read( uint8_t page , uint8_t address ) {
     // request one byte back from the chip
     wire.requestFrom( _i2c_address , (uint8_t)(1) );
 
+    while( !wire.available() ) { delay(1); };
     // receive one byte back from the chip
     return wire.read();
 
@@ -111,7 +112,7 @@ void IS31FL3731::modeset( uint8_t mode ) {
 
     // add in my data
     tempbyte &= 0b11100111;
-    tempbyte |= mode << 3;
+    tempbyte |= ( mode << 3 );
     
     // write back the completed register byte
     write( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER , tempbyte );
@@ -126,7 +127,7 @@ uint8_t IS31FL3731::modeget() {
 
     uint8_t tempbyte = read( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER );
 
-    tempbyte &= 0b11100111;
+    tempbyte &= 0b00011000;
 
     return ( tempbyte >> 3 );
 

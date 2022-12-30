@@ -30,7 +30,9 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 // include my IS31FL3731 library
 #include <IS31FL3731.h>
 
-IS31FL3731 myledmatrix = IS31FL3731( 0x74 );
+#define IS31FL3731_I2C_ADDRESS 0x75
+
+IS31FL3731 myledmatrix = IS31FL3731( IS31FL3731_I2C_ADDRESS );
 
 
 
@@ -47,7 +49,7 @@ uint8_t menumaxchoices = 6;
 
 String menutext[6] = { "I2C Scan" ,
                        "Test 1" ,
-                       "" ,
+                       "Test 2" ,
                        "" ,
                        "" ,
                        ""
@@ -116,7 +118,61 @@ void menucommand_01() {
 
 
 
-void menucommand_02() {};
+void menucommand_02() {
+
+  // bring up the wire library as a master
+  wire.begin();
+
+  // move cursor to home
+  lcd.clear();
+  lcd.setCursor( 0 , 0 );
+
+
+
+  // software shutdown mode
+  /*
+  lcd.print( "SS: " );
+  lcd.print( myledmatrix.shutdownget() );
+  lcd.print( ":" );
+  myledmatrix.shutdownset( 1 );
+  lcd.print( myledmatrix.shutdownget() );
+  while (1);
+  */
+
+  // turn off software shutdown mode
+  myledmatrix.shutdownset( 1 );
+
+
+
+
+
+  // Picture Display Mode
+  
+  lcd.print( "PD: " );
+  lcd.print( myledmatrix.modeget() );
+  lcd.print( ":" );
+  myledmatrix.modeset( 0 );
+  lcd.print( myledmatrix.modeget() );
+  while (1);
+  
+
+  // turn off software shutdown mode
+  //myledmatrix.shutdownset( 1 );
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 void menucommand_03() {};
 
