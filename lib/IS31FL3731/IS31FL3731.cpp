@@ -137,3 +137,39 @@ uint8_t IS31FL3731::modeget() {
 
 
 
+
+
+
+/// @brief Set the current frame number to display.
+/// @param frame the number of the frame to display.  0-7.
+void IS31FL3731::frameset( uint8_t frame ) {
+    write( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_PICTURE_DISPLAY_REG , frame );
+}
+
+/// @brief returns the current frame number from the chip.
+uint8_t IS31FL3731::frameget() {
+    return read( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_PICTURE_DISPLAY_REG );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
