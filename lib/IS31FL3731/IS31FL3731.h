@@ -22,7 +22,7 @@
 
 // a whole bunch of definitions
 
-// the animation page the refers to the control register
+// the animation page that refers to the control register
 #define IS31FL3731_PAGE_CONTROL 0x0B
 
 #define IS31FL3731_ADDRESS_CONFIG_REGISTER 0x00
@@ -35,23 +35,6 @@
 
 
 
-// functions required
-
-// control functions
-
-// shutdown()
-// get or set shutdown mode.
-
-
-// page fuctions
-
-// selectpage()
-// select animation page to write to
-
-// pixel functions
-
-// setpixel()
-// turn an individual pixel on or off.
 
 
 
@@ -62,15 +45,7 @@ private:
     /// @brief i2c address of chip
     uint8_t _i2c_address;
 
-    /// @brief Write a byte to the chip
-    /// @param page The page to write to, 0x0-7 animation, 0xB control.
-    /// @param address The address within the page to write to.
-    /// @param data The data to write
-    void write( uint8_t page , uint8_t address , uint8_t data );
 
-    /// @brief Read a byte from the chip
-    /// @param page The page to read from.  0x0-7 animation, 0xB control.
-    uint8_t read( uint8_t page , uint8_t address );
 
 public:
     /// @brief Constructor for IS31FL3731 LED matrix driver.
@@ -99,6 +74,16 @@ public:
 
     /// @brief returns the current frame number from the chip.
     uint8_t frameget();
+
+    /// @brief Write a byte to the chip
+    /// @param page The page to write to, 0x0-7 animation, 0xB control.
+    /// @param address The address within the page to write to.
+    /// @param data The data to write
+    void write( uint8_t page , uint8_t address , uint8_t data );
+
+    /// @brief Read a byte from the chip
+    /// @param page The page to read from.  0x0-7 animation, 0xB control.
+    uint8_t read( uint8_t page , uint8_t address );
 
 
 

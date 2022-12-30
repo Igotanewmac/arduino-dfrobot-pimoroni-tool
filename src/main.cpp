@@ -140,7 +140,11 @@ void menucommand_02() {
   */
 
   // turn off software shutdown mode
+  myledmatrix.shutdownset( 0 );
+  //myledmatrix.write( 0x0B , 0x0A , 00 );
+  delay(10);
   myledmatrix.shutdownset( 1 );
+  //myledmatrix.write( 0x0B , 0x0A , 0x01 );
 
 
 
@@ -158,6 +162,7 @@ void menucommand_02() {
 
   // Set to picture display mode
   myledmatrix.modeset( 0 );
+  //myledmatrix.write( 0x0B , 0x00 , 0x00 );
 
 
 
@@ -173,14 +178,37 @@ void menucommand_02() {
 
   // Select frame 0
   myledmatrix.frameset( 0 );
+  //myledmatrix.write( 0x0B , 0x01 , 0x00 );
+
+
+
+  // apparently now I can set some led's on???
+
+
+  // turn everything off in a sensible fashion
+  for ( uint8_t i = 0 ; i < 0x12 ; i++ ) {
+    myledmatrix.write( 0x00 , i , 0xFF );
+  }
+
+  // and to the blink controls
+  for ( uint8_t i = 12 ; i < 0x24 ; i++ ) {
+    myledmatrix.write( 0x00 , i , 0xFF );
+  }
+
+  // and for the pwm controls
+  for ( uint8_t i = 24 ; i < 0xB4 ; i++ ) {
+    myledmatrix.write( 0x00 , i , 0x04 );
+  }
   
+  // now hold here
+  while(1);
+  
+  
+  }
 
 
-};
 
-
-
-
+//00h 02h 04h 06h 08h 0Ah 0Ch 0Eh 10h
 
 
 

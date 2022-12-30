@@ -23,7 +23,12 @@ void IS31FL3731::write( uint8_t page , uint8_t address , uint8_t data ) {
     wire.beginTransmission( _i2c_address );
 
     // send the page
+    wire.write( 0xFD );
     wire.write( page );
+
+    wire.endTransmission();
+
+    wire.beginTransmission( _i2c_address );
 
     // send the address
     wire.write( address );
@@ -52,8 +57,13 @@ uint8_t IS31FL3731::read( uint8_t page , uint8_t address ) {
     wire.beginTransmission( _i2c_address );
 
     // send the page
+    wire.write( 0xFD );
     wire.write( page );
 
+    wire.endTransmission();
+
+    wire.beginTransmission( _i2c_address );
+    
     // send the address
     wire.write( address );
 
