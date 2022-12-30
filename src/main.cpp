@@ -27,13 +27,20 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 
 
+// include my IS31FL3731 library
+#include <IS31FL3731.h>
+
+IS31FL3731 myledmatrix = IS31FL3731( 0x74 );
+
+
+
+
+
 // define the button pin
 
 #define BUTTONPIN A0
 
-
-
-
+// define the menu options
 int8_t menucurrentchoice = 0;
 
 uint8_t menumaxchoices = 6;
@@ -116,6 +123,28 @@ void menucommand_03() {};
 void menucommand_04() {};
 
 void menucommand_05() {};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -245,11 +274,11 @@ void loop() {
   //lcd.clear();
   // set the cursor to column 0, line 1
   // (note: line 1 is the second row, since counting begins with 0):
-  lcd.setCursor(0, 1);
+  // lcd.setCursor(0, 1);
   // print the number of seconds since reset:
-  lcd.print( analogRead( BUTTONPIN ) );
+  // lcd.print( analogRead( BUTTONPIN ) );
 
-  delay( 750 );
+  delay( 500 );
 
 }
 
