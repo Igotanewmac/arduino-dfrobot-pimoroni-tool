@@ -43,11 +43,6 @@ private:
     /// @brief i2c address of chip
     uint8_t _i2c_address;
 
-public:
-    /// @brief Constructor for IS31FL3731 LED matrix driver.
-    /// @param address I2C address of the chip.
-    IS31FL3731( uint8_t address );
-
     /// @brief Write a byte to the chip
     /// @param page The page to write to, 0x0-7 animation, 0xB control.
     /// @param address The address within the page to write to.
@@ -58,7 +53,14 @@ public:
     /// @param page The page to read from.  0x0-7 animation, 0xB control.
     uint8_t read( uint8_t page , uint8_t address );
 
-    
+public:
+    /// @brief Constructor for IS31FL3731 LED matrix driver.
+    /// @param address I2C address of the chip.
+    IS31FL3731( uint8_t address );
+
+
+
+
 
 };
 
