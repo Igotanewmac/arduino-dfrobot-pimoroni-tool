@@ -25,8 +25,8 @@
 // the animation page the refers to the control register
 #define IS31FL3731_PAGE_CONTROL 0x0B
 
+#define IS31FL3731_ADDRESS_CONFIG_REGISTER 0x00
 #define IS31FL3731_ADDRESS_SOFTWARESHUTDOWN 0x0A
-
 
 
 
@@ -84,6 +84,12 @@ public:
     uint8_t shutdownget();
 
 
+    /// @brief Set the mode in the configuration register.
+    /// @param mode 0b00 = picture mode, 0b01 = auto frame play, 0b1x = audio frame play.
+    void modeset( uint8_t mode );
+    
+    /// @brief Gets the current mode from the chip.
+    uint8_t modeget();
 
 };
 

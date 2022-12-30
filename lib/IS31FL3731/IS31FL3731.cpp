@@ -102,5 +102,37 @@ uint8_t IS31FL3731::shutdownget() {
 
 
 
+/// @brief Set the mode in the configuration register.
+/// @param mode 0b00 = picture mode, 0b01 = auto frame play, 0b1x = audio frame play.
+void IS31FL3731::modeset( uint8_t mode ) {
+
+    // read out the current config register byte
+    uint8_t tempbyte = read( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER );
+
+    // add in my data
+    tempbyte &= 0b11100111;
+    tempbyte |= mode << 3;
+    
+    // write back the completed register byte
+    write( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER , tempbyte );
+
+    // and return to caller!
+    return;
+
+}
+
+/// @brief Gets the current mode from the chip.
+uint8_t IS31FL3731::modeget() {
+
+    uint8_t tempbyte = read( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER );
+
+    tempbyte &= 0b11100111;
+
+    return ( tempbyte >> 3 );
+
+}
+
+
+
 
 
