@@ -52,6 +52,22 @@ public:
     /// @param address I2C address of the chip.
     IS31FL3731( uint8_t address );
 
+
+
+    /// @brief Write a byte to the chip
+    /// @param page The page to write to, 0x0-7 animation, 0xB control.
+    /// @param address The address within the page to write to.
+    /// @param data The data to write
+    void write( uint8_t page , uint8_t address , uint8_t data );
+
+    /// @brief Read a byte from the chip
+    /// @param page The page to read from.  0x0-7 animation, 0xB control.
+    uint8_t read( uint8_t page , uint8_t address );
+
+
+
+
+    
     /// @brief Sets the software shutdown state to 0 ( shutdown ) or 1 ( normal operation ). 
     /// @param state 0 or 1. 0 is shutdown, 1 is normal operation.
     void shutdownset( uint8_t state );
@@ -75,15 +91,31 @@ public:
     /// @brief returns the current frame number from the chip.
     uint8_t frameget();
 
-    /// @brief Write a byte to the chip
-    /// @param page The page to write to, 0x0-7 animation, 0xB control.
-    /// @param address The address within the page to write to.
-    /// @param data The data to write
-    void write( uint8_t page , uint8_t address , uint8_t data );
 
-    /// @brief Read a byte from the chip
-    /// @param page The page to read from.  0x0-7 animation, 0xB control.
-    uint8_t read( uint8_t page , uint8_t address );
+
+
+
+
+    /// @brief Set a pixel on or off
+    /// @param xpos The x position of the pixel ( column, from bottom left )
+    /// @param ypos The y position of the pixel ( row, from bottom left )
+    /// @param state The state, 1 for on, 0 for off.
+    void pixelset( uint8_t xpos , uint8_t ypos , uint8_t state );
+
+    
+    /// @brief Set a pixels blink flag on or off
+    /// @param xpos The x position of the pixel ( column, from bottom left )
+    /// @param ypos The y position of the pixel ( row, from bottom left )
+    /// @param state The state, 1 for on, 0 for off.
+    void pixelblinkset( uint8_t xpos , uint8_t ypos , uint8_t state );
+    
+    /// @brief Set a pixels pwm value
+    /// @param xpos The x position of the pixel ( column, from bottom left )
+    /// @param ypos The y position of the pixel ( row, from bottom left )
+    /// @param pwmval The pwm value of the pixel, 0-255.
+    void pixelpwmset( uint8_t xpos , uint8_t ypos , uint8_t pwmval );
+
+    
 
 
 

@@ -183,25 +183,41 @@ void menucommand_02() {
 
 
   // apparently now I can set some led's on???
-
+  //myledmatrix.write( 0x0B , 0x05 , 0b00100000 );
 
   // turn everything off in a sensible fashion
-  for ( uint8_t i = 0 ; i < 0x12 ; i++ ) {
-    myledmatrix.write( 0x00 , i , 0xFF );
-  }
+  //for ( uint8_t i = 0 ; i < 0x12 ; i++ ) {
+  //  myledmatrix.write( 0x00 , i , 0x00 );
+  //}
+  //myledmatrix.write( 0x00 , 0x02 , 0xFF );
 
   // and to the blink controls
-  for ( uint8_t i = 12 ; i < 0x24 ; i++ ) {
-    myledmatrix.write( 0x00 , i , 0xFF );
-  }
+  //for ( uint8_t i = 12 ; i < 0x24 ; i++ ) {
+  //  myledmatrix.write( 0x00 , i , 0xFF );
+  //}
 
   // and for the pwm controls
-  for ( uint8_t i = 24 ; i < 0xB4 ; i++ ) {
-    myledmatrix.write( 0x00 , i , 0x04 );
+  //for ( uint8_t i = 24 ; i < 0xB4 ; i++ ) {
+  //  myledmatrix.write( 0x00 , i , 0x04 );
+  //}
+
+
+  // try some setpixels
+  while(1){
+  for ( uint8_t xpos = 0 ; xpos < 11 ; xpos++ ) {
+    for ( uint8_t ypos = 0 ; ypos < 7 ; ypos++ ) {
+      myledmatrix.pixelset( xpos , ypos , 1 );
+      delay( 100 );
+      myledmatrix.pixelset( xpos , ypos , 0 );
+      myledmatrix.pixelset( xpos , ypos , 0 );
+      myledmatrix.pixelset( xpos , ypos , 0 );
+      delay( 100 );
+    }
   }
-  
-  // now hold here
+  }
   while(1);
+
+
   
   
   }
