@@ -161,8 +161,20 @@ void menucommand_02() {
 
 
 
+  // Frame Select
+  /*
+  lcd.print( "FS: " );
+  lcd.print( myledmatrix.frameget() );
+  lcd.print( ":" );
+  myledmatrix.frameset( 0 );
+  lcd.print( myledmatrix.frameget() );
+  while (1);
+  */
 
+  // Select frame 0
+  myledmatrix.frameset( 0 );
   
+
 
 };
 
