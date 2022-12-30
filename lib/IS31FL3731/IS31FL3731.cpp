@@ -76,6 +76,27 @@ uint8_t IS31FL3731::read( uint8_t page , uint8_t address ) {
 
 
 
+/// @brief Sets the software shutdown state to 0 ( shutdown ) or 1 ( normal operation ). 
+/// @param state 0 or 1. 0 is shutdown, 1 is normal operation.
+void IS31FL3731::shutdownset( uint8_t state ) {
+
+    // write the data to the chip
+    write( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_SOFTWARESHUTDOWN , state );
+
+}
+
+
+
+
+
+
+
+/// @brief Retreives the current software shutdown state as a uint8_t.
+uint8_t IS31FL3731::shutdownget() {
+
+    return read( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_SOFTWARESHUTDOWN );
+
+}
 
 
 

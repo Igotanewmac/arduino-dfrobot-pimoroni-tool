@@ -16,6 +16,24 @@
 
 
 
+
+
+
+
+// a whole bunch of definitions
+
+// the animation page the refers to the control register
+#define IS31FL3731_PAGE_CONTROL 0x0B
+
+#define IS31FL3731_ADDRESS_SOFTWARESHUTDOWN 0x0A
+
+
+
+
+
+
+
+
 // functions required
 
 // control functions
@@ -58,7 +76,12 @@ public:
     /// @param address I2C address of the chip.
     IS31FL3731( uint8_t address );
 
+    /// @brief Sets the software shutdown state to 0 ( shutdown ) or 1 ( normal operation ). 
+    /// @param state 0 or 1. 0 is shutdown, 1 is normal operation.
+    void shutdownset( uint8_t state );
 
+    /// @brief Retreives the current software shutdown state.
+    uint8_t shutdownget();
 
 
 
