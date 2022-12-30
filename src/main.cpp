@@ -25,7 +25,7 @@ int8_t menucurrentchoice = 0;
 uint8_t menumaxchoices = 6;
 
 String menutext[6] = { "I2C Scan" ,
-                       "" ,
+                       "Test 1" ,
                        "" ,
                        "" ,
                        "" ,
@@ -64,7 +64,7 @@ void menucommand_00() {
 
 
 
-// dump eeproms
+// Test 1
 void menucommand_01() {
   
   // bring up i2c as a master
@@ -72,22 +72,21 @@ void menucommand_01() {
 
   lcd.clear();
   lcd.setCursor( 0 , 0 );
-  lcd.print( "Dumping EEPROMS" );
+  lcd.print( "Test 1" );
   
-  // for each bank
-  for ( int i = 0 ; i < 8 ; i++ ) {
+  // bring up i2c as master
 
-    // read out 32k
-    
-    Serial.print( "Bank: " );
-    Serial.print( i );
-    Serial.println( " : " );
+  // say hello to the chip
 
-    //dump_eeprom_serial( 0x50 + i );
+  // send the bank address
 
-    Serial.println();
+  // send the register address
 
-  }
+  // send the actual data
+
+  // say goodbye to the chip
+
+  
   
 }
 
