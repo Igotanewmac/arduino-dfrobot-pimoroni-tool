@@ -39,8 +39,7 @@
 
 
 
-class IS31FL3731
-{
+class IS31FL3731 {
 private:
     /// @brief i2c address of chip
     uint8_t _i2c_address;
@@ -53,6 +52,15 @@ public:
     IS31FL3731();
 
 
+    /// @brief Set the i2c address of the chip.
+    /// @param _i2c_address The i2c address of the chip.
+    void i2caddressset( uint8_t new_i2c_address );
+
+    /// @brief  Returns the current i2c address as a uint8_t
+    uint8_t i2caddressget();
+
+
+
 
     /// @brief Write a byte to the chip
     /// @param page The page to write to, 0x0-7 animation, 0xB control.
@@ -62,6 +70,7 @@ public:
 
     /// @brief Read a byte from the chip
     /// @param page The page to read from.  0x0-7 animation, 0xB control.
+    /// @param address The address within the page to write to.
     uint8_t read( uint8_t page , uint8_t address );
 
 

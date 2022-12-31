@@ -13,6 +13,26 @@ IS31FL3731::IS31FL3731() {
 
 
 
+
+
+/// @brief Set the i2c address of the chip.
+/// @param _i2c_address The i2c address of the chip.
+void IS31FL3731::i2caddressset( uint8_t new_i2c_address ) {
+
+    _i2c_address = ( new_i2c_address & 0b01111111 );
+    
+}
+
+/// @brief  Returns the current i2c address as a uint8_t
+uint8_t IS31FL3731::i2caddressget() {
+
+    return _i2c_address;
+
+}
+
+
+
+
 /// @brief Write a byte to the chip
 /// @param page The page to write to, 0x0-7 animation, 0xB control.
 /// @param address The address within the page to write to.
