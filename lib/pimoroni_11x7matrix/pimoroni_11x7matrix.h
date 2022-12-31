@@ -16,12 +16,21 @@ class Pimoroni_11x7matrix {
 
     private:
 
+    /// @brief The pixel buffer for the on/pff state.
     uint8_t _ledstate[11];
+
+    /// @brief The pixel buffer for the blink on/off state.
     uint8_t _ledblinkstate[11];
+
+    /// @brief The pixel buffer for the pwm values.
     uint8_t _ledpwmstate[11][7];
 
+    /// @brief The i2c address of the chip.
     uint8_t _i2c_address;
 
+    
+    
+    
     public:
 
     /// @brief Constructor for Pimoroni 11x7 Matrix Driver
@@ -36,10 +45,40 @@ class Pimoroni_11x7matrix {
 
 
 
-    /// @brief Clears the buffer to all off.
-    void clear();
+    /// @brief Write the pixel buffer to a frame on the chip.
+    /// @param framenumber The number of the frame to write to. 0-7.
+    void writepixelbuffertoframe( uint8_t framenumber );
 
-    
+
+    /// @brief Set the chips frame display pointer
+    /// @param framenumber The number of the frame to display. 0-7.
+    void framedisplaypointerset( uint8_t framenumber );
+
+
+    /// @brief Fetches the current frame display pointer from the chip.
+    /// @return The current frame display pointer as a uint8_t. 0-7.
+    uint8_t framedisplaypointerget();
+
+
+
+
+
+    /// @brief Sets the pixel buffers for state, blink and pwm to all zero.
+    void clearallpixelbuffers();
+
+
+    /// @brief Sets the pixel buffer for state to all zero.
+    void clearstatepixelbuffer();
+
+    /// @brief Sets the pixel buffer for blink state to all zero.
+    void clearblinkpixelbuffer();
+
+    /// @brief Sets the pixel buffer for pwm value to all zero.
+    void clearpwmpixelbuffer();
+
+
+
+
     /// @brief Sets a pixel to on or off in the pixel buffer.
     /// @param xpos The x position, with zero at the bottom left.
     /// @param ypos The y position, with the zero at the bottom left.
@@ -91,7 +130,7 @@ class Pimoroni_11x7matrix {
 
 
 
-    
+
 
 
 
