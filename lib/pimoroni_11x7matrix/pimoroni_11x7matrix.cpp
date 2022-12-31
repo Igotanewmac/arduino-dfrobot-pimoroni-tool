@@ -19,13 +19,30 @@ Pimoroni_11x7matrix::Pimoroni_11x7matrix() {
 
 /// @brief Set the i2c address and perform any setup required.
 /// @param new_i2c_address The i2c address of the chip.
-void Pimoroni_11x7matrix::begin( uint8_t new_i2c_address ) {
+void Pimoroni_11x7matrix::begin( uint8_t new_i2c_address = 0x75 ) {
 
     // make sure the wire library is started.
     wire.begin();
 
     // store my i2c address for later.
     _i2c_address = new_i2c_address;
+
+    // restart the chip
+    softwareshutdownset( 0 );
+    delay(10);
+    softwareshutdownset( 1 );
+
+    // set to picture display mode
+    displaymodeset( 0x00 );
+
+    // set the frame pointer to zero
+    framedisplaypointerset( 0x00 );
+
+    // clear the buffers
+    clearallpixelbuffers();
+
+    // now write them out
+    writepixelbuffertoframe( 0x00 );
 
     // all done, return to caller.
     return;

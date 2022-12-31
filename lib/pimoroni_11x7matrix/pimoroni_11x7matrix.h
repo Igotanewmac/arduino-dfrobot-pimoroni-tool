@@ -100,6 +100,14 @@ class Pimoroni_11x7matrix {
 
 
 
+    /// @brief Set the chips frame display pointer
+    /// @param framenumber The number of the frame to display. 0-7.
+    void framedisplaypointerset( uint8_t framenumber );
+
+
+    /// @brief Fetches the current frame display pointer from the chip.
+    /// @return The current frame display pointer as a uint8_t. 0-7.
+    uint8_t framedisplaypointerget();
 
 
 
@@ -113,14 +121,6 @@ class Pimoroni_11x7matrix {
     void writepixelbuffertoframe( uint8_t framenumber );
 
 
-    /// @brief Set the chips frame display pointer
-    /// @param framenumber The number of the frame to display. 0-7.
-    void framedisplaypointerset( uint8_t framenumber );
-
-
-    /// @brief Fetches the current frame display pointer from the chip.
-    /// @return The current frame display pointer as a uint8_t. 0-7.
-    uint8_t framedisplaypointerget();
 
 
 
