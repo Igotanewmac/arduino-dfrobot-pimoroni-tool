@@ -110,11 +110,153 @@ uint8_t Pimoroni_11x7matrix::_chipreadbyte( uint8_t framenumber , uint8_t addres
 
 
 
+
+
+
+/// @brief Sets the software shutdown flag on the chip.
+/// @param state The state to set as a uint8_t. 0 = shutdown, 1 = normal operation.
+void Pimoroni_11x7matrix::softwareshutdownset( uint8_t state ) {
+
+    _chipwritebyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_SOFTWARESHUTDOWN , state );
+
+}
+
+/// @brief Gets the software shutdown flag from the chip.
+/// @return the flag as a uint8_t. 0 = shutdown, 1 = normal operation.
+uint8_t Pimoroni_11x7matrix::softwareshutdownget() {
+
+    return _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_SOFTWARESHUTDOWN );
+
+}
+
+
+/// @brief Sets the display mode on the chip.
+/// @param mode The mode number to set. 0b00 = picture mode, 0b01 = auto frame play, 0b1x = audio frame play.
+void Pimoroni_11x7matrix::displaymodeset( uint8_t mode ) {
+
+
+    // read out the current byte
+    uint8_t tempbyte = _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER );
+
+    // add in my data
+    tempbyte &= 0b11100111;
+    tempbyte |= ( mode << 3 );
+
+    _chipwritebyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER , tempbyte );
+
+    // all done, return to caller.
+    return;
+
+}
+
+
+
+
+
+
+
+/// @brief Gets the display mode from the chip.
+/// @return The current display mode number as a uint8_t. 0b00 = picture mode, 0b01 = auto frame play, 0b1x = audio frame play.
+uint8_t Pimoroni_11x7matrix::displaymodeget() {
+
+    uint8_t tempbyte = _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER );
+
+    // get our data out
+    tempbyte &= 0b00011000;
+    
+    return (uint8_t)( tempbyte >> 3 );
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /// @brief Write the pixel buffer to a frame on the chip.
 /// @param framenumber The number of the frame to write to. 0-7.
 void Pimoroni_11x7matrix::writepixelbuffertoframe( uint8_t framenumber ) {
 
+
+
+    // write the buffer line by line to map easily
+
+    _chipwritebyte( 0x00 , 0x00 , _ledstate[ 0  ] );
+    _chipwritebyte( 0x00 , 0x01 , _ledstate[ 1  ] );
+    _chipwritebyte( 0x00 , 0x02 , _ledstate[ 2  ] );
+    _chipwritebyte( 0x00 , 0x03 , _ledstate[ 3  ] );
+    _chipwritebyte( 0x00 , 0x04 , _ledstate[ 4  ] );
+    _chipwritebyte( 0x00 , 0x05 , _ledstate[ 5  ] );
+    _chipwritebyte( 0x00 , 0x06 , _ledstate[ 6  ] );
+    _chipwritebyte( 0x00 , 0x07 , _ledstate[ 7  ] );
+    _chipwritebyte( 0x00 , 0x08 , _ledstate[ 8  ] );
+    _chipwritebyte( 0x00 , 0x09 , _ledstate[ 9  ] );
+    _chipwritebyte( 0x00 , 0x0A , _ledstate[ 10 ] );
+    
+
+    // write the blink state buffer line by line to map easily
+
+    _chipwritebyte( 0x00 , 0x12 , _ledblinkstate[ 0  ] );
+    _chipwritebyte( 0x00 , 0x13 , _ledblinkstate[ 1  ] );
+    _chipwritebyte( 0x00 , 0x14 , _ledblinkstate[ 2  ] );
+    _chipwritebyte( 0x00 , 0x15 , _ledblinkstate[ 3  ] );
+    _chipwritebyte( 0x00 , 0x16 , _ledblinkstate[ 4  ] );
+    _chipwritebyte( 0x00 , 0x17 , _ledblinkstate[ 5  ] );
+    _chipwritebyte( 0x00 , 0x18 , _ledblinkstate[ 6  ] );
+    _chipwritebyte( 0x00 , 0x19 , _ledblinkstate[ 7  ] );
+    _chipwritebyte( 0x00 , 0x1A , _ledblinkstate[ 8  ] );
+    _chipwritebyte( 0x00 , 0x1B , _ledblinkstate[ 9  ] );
+    _chipwritebyte( 0x00 , 0x1C , _ledblinkstate[ 10 ] );
+    
+
+
+    // write out the pwm state buffer line by line to map easily
+
+    uint8_t startaddress = 0x24;
+
+    for ( uint8_t x = 0 ; x < 11 ; x++ ) {
+
+        for ( uint8_t y = 0 ; y < 7 ; y++ ) {
+
+            _chipwritebyte( 0x00 , startaddress + y , _ledpwmstate[ x ][ y ] );
+
+            
+        }
+
+        startaddress += 8;
+
+    }
+
+
+
+    // now all done, return to caller.
+    return;
+
+
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -126,14 +268,14 @@ void Pimoroni_11x7matrix::writepixelbuffertoframe( uint8_t framenumber ) {
 /// @brief Set the chips frame display pointer
 /// @param framenumber The number of the frame to display. 0-7.
 void Pimoroni_11x7matrix::framedisplaypointerset( uint8_t framenumber ) {
-
+    _chipwritebyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_PICTURE_DISPLAY_REG , framenumber );
 }
 
 
 /// @brief Fetches the current frame display pointer from the chip.
 /// @return The current frame display pointer as a uint8_t. 0-7.
 uint8_t Pimoroni_11x7matrix::framedisplaypointerget() {
-    return 0;
+    return _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_PICTURE_DISPLAY_REG );
 }
 
 

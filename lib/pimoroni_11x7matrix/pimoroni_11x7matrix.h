@@ -10,10 +10,26 @@
 #include <Arduino.h>
 
 // pull in the wire library
-#include <Wire.h>
 #ifndef wire
+#include <Wire.h>
 #define wire Wire
 #endif
+
+
+
+
+// a whole bunch of definitions
+
+// the animation page that refers to the control register
+#define IS31FL3731_PAGE_CONTROL 0x0B
+
+#define IS31FL3731_ADDRESS_CONFIG_REGISTER 0x00
+#define IS31FL3731_ADDRESS_PICTURE_DISPLAY_REG 0x01
+#define IS31FL3731_ADDRESS_SOFTWARESHUTDOWN 0x0A
+
+
+
+
 
 
 
@@ -58,6 +74,35 @@ class Pimoroni_11x7matrix {
     /// @brief Set the i2c address and perform any setup required.
     /// @param new_i2c_address The i2c address of the chip.
     void begin( uint8_t new_i2c_address );
+
+
+
+
+    /// @brief Sets the software shutdown flag on the chip.
+    /// @param state The state to set as a uint8_t. 0 = shutdown, 1 = normal operation.
+    void softwareshutdownset( uint8_t state );
+
+    /// @brief Gets the software shutdown flag from the chip.
+    /// @return the flag as a uint8_t. 0 = shutdown, 1 = normal operation.
+    uint8_t softwareshutdownget();
+
+
+    /// @brief Sets the display mode on the chip.
+    /// @param mode The mode number to set. 0b00 = picture mode, 0b01 = auto frame play, 0b1x = audio frame play.
+    void displaymodeset( uint8_t mode );
+
+    /// @brief Gets the display mode from the chip.
+    /// @return The current display mode number as a uint8_t. 0b00 = picture mode, 0b01 = auto frame play, 0b1x = audio frame play.
+    uint8_t displaymodeget();
+
+
+
+
+
+
+
+
+
 
 
 
