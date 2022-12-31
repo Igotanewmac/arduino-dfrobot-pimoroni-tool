@@ -9,6 +9,12 @@
 // pull in the arduino headers
 #include <Arduino.h>
 
+// pull in the wire library
+#include <Wire.h>
+#ifndef wire
+#define wire Wire
+#endif
+
 
 
 class Pimoroni_11x7matrix {
@@ -28,6 +34,18 @@ class Pimoroni_11x7matrix {
     /// @brief The i2c address of the chip.
     uint8_t _i2c_address;
 
+
+    /// @brief Write a single byte of data to the chip.
+    /// @param framenumber The number of the frame to write to. 0x00-0x07 Animation. 0x0B Control.
+    /// @param address The address within the frame to write to.
+    /// @param data The data byte to write to the chip.
+    void _chipwritebyte( uint8_t framenumber , uint8_t address , uint8_t data );
+
+    /// @brief Read a single byte of data from the chip.
+    /// @param framenumber The number of the frame to read from. 0x00-0x07 Animation. 0x0B Control.
+    /// @param address The address within the frame to read from.
+    /// @return The data byte rturned from the chip as a uint8_t.
+    uint8_t _chipreadbyte( uint8_t framenumber , uint8_t address );
     
     
     

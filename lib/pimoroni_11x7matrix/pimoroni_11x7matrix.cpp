@@ -21,9 +21,90 @@ Pimoroni_11x7matrix::Pimoroni_11x7matrix() {
 /// @param new_i2c_address The i2c address of the chip.
 void Pimoroni_11x7matrix::begin( uint8_t new_i2c_address ) {
 
+    // make sure the wire library is started.
+    wire.begin();
+
+    // store my i2c address for later.
+    _i2c_address = new_i2c_address;
+
+    // all done, return to caller.
+    return;
+
 }
 
 
+
+
+/// @brief Write a single byte of data to the chip.
+/// @param framenumber The number of the frame to write to. 0x00-0x07 Animation. 0x0B Control.
+/// @param address The address within the frame to write to.
+/// @param data The data byte to write to the chip.
+void Pimoroni_11x7matrix::_chipwritebyte( uint8_t framenumber , uint8_t address , uint8_t data ) {
+
+
+    // say hello to the chip
+    wire.beginTransmission( _i2c_address );
+
+    // send the frame number
+    wire.write( 0xFD );
+    wire.write( framenumber );
+
+    // say goodbye to the chip.
+    wire.endTransmission();
+
+    // say hello to the chip again...
+    wire.beginTransmission( _i2c_address );
+
+    // send the address
+    wire.write( address );
+
+    // send the data
+    wire.write( data );
+
+    // say goodbye
+    wire.endTransmission();
+
+    // all done, return to caller
+    return;
+    
+}
+
+
+/// @brief Read a single byte of data from the chip.
+/// @param framenumber The number of the frame to read from. 0x00-0x07 Animation. 0x0B Control.
+/// @param address The address within the frame to read from.
+/// @return The data byte rturned from the chip as a uint8_t.
+uint8_t Pimoroni_11x7matrix::_chipreadbyte( uint8_t framenumber , uint8_t address ) {
+
+    // say hello to the chip
+    wire.beginTransmission( _i2c_address );
+
+    // send the frame number
+    wire.write( 0xFD );
+    wire.write( framenumber );
+
+    // say goodbye to the chip.
+    wire.endTransmission();
+
+    // say hello to the chip again...
+    wire.beginTransmission( _i2c_address );
+    
+    // send the address
+    wire.write( address );
+
+    // say goodye to the chip
+    wire.endTransmission();
+
+    // request one byte back from the chip
+    wire.requestFrom( _i2c_address , (uint8_t)(0x01) );
+
+    // wait until that byte is available.
+    while( !wire.available() ) { delay(1); };
+
+    // receive one byte back from the chip and return it as a uint8_t.
+    return (uint8_t)( wire.read() );
+
+}
 
 
 
