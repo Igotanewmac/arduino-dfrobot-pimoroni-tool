@@ -22,14 +22,16 @@ class Pimoroni_11x7matrix {
     uint8_t ledblinkstate[11];
     uint8_t ledpwmstate[77];
 
+    IS31FL3731 is31driver;
+
 
     public:
 
     /// @brief Constructor for Pimoroni 11x7 Matrix Driver
-    /// @param _i2c_address The i2c address of the chip.
-    Pimoroni_11x7matrix( uint8_t _i2c_address );
+    Pimoroni_11x7matrix();
 
-    
+
+
 
 
 
