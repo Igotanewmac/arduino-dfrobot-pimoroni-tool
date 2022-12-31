@@ -96,24 +96,6 @@ public:
 
 
 
-    /// @brief Set a pixel on or off
-    /// @param xpos The x position of the pixel ( column, from bottom left )
-    /// @param ypos The y position of the pixel ( row, from bottom left )
-    /// @param state The state, 1 for on, 0 for off.
-    void pixelset( uint8_t xpos , uint8_t ypos , uint8_t state );
-
-    
-    /// @brief Set a pixels blink flag on or off
-    /// @param xpos The x position of the pixel ( column, from bottom left )
-    /// @param ypos The y position of the pixel ( row, from bottom left )
-    /// @param state The state, 1 for on, 0 for off.
-    void pixelblinkset( uint8_t xpos , uint8_t ypos , uint8_t state );
-    
-    /// @brief Set a pixels pwm value
-    /// @param xpos The x position of the pixel ( column, from bottom left )
-    /// @param ypos The y position of the pixel ( row, from bottom left )
-    /// @param pwmval The pwm value of the pixel, 0-255.
-    void pixelpwmset( uint8_t xpos , uint8_t ypos , uint8_t pwmval );
 
     
 

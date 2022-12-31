@@ -171,48 +171,6 @@ uint8_t IS31FL3731::frameget() {
 
 
 
-/// @brief Set a pixel on or off
-/// @param xpos The x position of the pixel ( column, from bottom left )
-/// @param ypos The y position of the pixel ( row, from bottom left )
-/// @param state The state, 1 for on, 0 for off.
-void IS31FL3731::pixelset( uint8_t xpos , uint8_t ypos , uint8_t state ) {
-
-
-    uint8_t tempbyte = read( 0x00 , xpos );
-
-    tempbyte &= ~( 1 << ypos );
-
-    if ( state ) {
-        tempbyte |= ( 1 << ypos );
-    }
-
-    write( 0x00 , xpos , tempbyte );
-    
-    return;
-
-}
-
-
-
-
-
-/// @brief Set a pixels blink flag on or off
-/// @param xpos The x position of the pixel ( column, from bottom left )
-/// @param ypos The y position of the pixel ( row, from bottom left )
-/// @param state The state, 1 for on, 0 for off.
-void IS31FL3731::pixelblinkset( uint8_t xpos , uint8_t ypos , uint8_t state ) {}
-
-
-
-
-/// @brief Set a pixels pwm value
-/// @param xpos The x position of the pixel ( column, from bottom left )
-/// @param ypos The y position of the pixel ( row, from bottom left )
-/// @param pwmval The pwm value of the pixel, 0-255.
-void IS31FL3731::pixelpwmset( uint8_t xpos , uint8_t ypos , uint8_t pwmval ) {}
-
-
-
 
 
 
