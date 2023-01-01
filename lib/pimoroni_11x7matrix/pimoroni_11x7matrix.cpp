@@ -39,7 +39,7 @@ void Pimoroni_11x7matrix::begin( uint8_t new_i2c_address = 0x75 ) {
     framedisplaypointerset( 0x00 );
 
     // clear the buffers
-    clearallpixelbuffers();
+    pixelbuffersclearall();
 
     // now write them out
     writepixelbuffertoframe( 0x00 );
@@ -303,7 +303,7 @@ uint8_t Pimoroni_11x7matrix::framedisplaypointerget() {
 
 
 /// @brief Sets the pixel buffers for state, blink and pwm to all zero.
-void Pimoroni_11x7matrix::clearallpixelbuffers() {
+void Pimoroni_11x7matrix::pixelbuffersclearall() {
 
     // for each column of pixel buffers
     for ( uint8_t x = 0 ; x < 11 ; x++ ) {
@@ -333,7 +333,7 @@ void Pimoroni_11x7matrix::clearallpixelbuffers() {
 
 
 /// @brief Sets the pixel buffer for state to all zero.
-void Pimoroni_11x7matrix::clearstatepixelbuffer() {
+void Pimoroni_11x7matrix::pixelbufferstateclear() {
 
     // for each element in the _ledstate array...
     for ( uint8_t i = 0 ; i < 11 ; i++ ) {
@@ -351,7 +351,7 @@ void Pimoroni_11x7matrix::clearstatepixelbuffer() {
 
 
 /// @brief Sets the pixel buffer for blink state to all zero.
-void Pimoroni_11x7matrix::clearblinkpixelbuffer() {
+void Pimoroni_11x7matrix::pixelbufferblinkstateclear() {
 
     // for each element in the _ledblinkstate array...
     for ( uint8_t i = 0 ; i < 11 ; i++ ) {
@@ -369,7 +369,7 @@ void Pimoroni_11x7matrix::clearblinkpixelbuffer() {
 
 
 /// @brief Sets the pixel buffer for pwm value to all zero.
-void Pimoroni_11x7matrix::clearpwmpixelbuffer() {
+void Pimoroni_11x7matrix::pixelbufferpwmstateclear() {
 
     // for each column in the _ledpwmstate array...
     for ( uint8_t x = 0 ; x < 11 ; x++ ) {

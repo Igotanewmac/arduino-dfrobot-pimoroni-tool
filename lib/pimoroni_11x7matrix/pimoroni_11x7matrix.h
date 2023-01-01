@@ -118,17 +118,36 @@ class Pimoroni_11x7matrix {
 
 
     /// @brief Sets the pixel buffers for state, blink and pwm to all zero.
-    void clearallpixelbuffers();
+    void pixelbuffersclearall();
 
 
     /// @brief Sets the pixel buffer for state to all zero.
-    void clearstatepixelbuffer();
+    void pixelbufferstateclear();
 
     /// @brief Sets the pixel buffer for blink state to all zero.
-    void clearblinkpixelbuffer();
+    void pixelbufferblinkstateclear();
 
     /// @brief Sets the pixel buffer for pwm value to all zero.
-    void clearpwmpixelbuffer();
+    void pixelbufferpwmstateclear();
+
+
+
+    /// @brief Set all pixels state to the given value.
+    /// @param data 0 = off, 1 = on.
+    void pixelbufferstatefill( uint8_t data );
+
+    /// @brief Set all pixels blink state to the given value
+    /// @param data 0 = off, 1 = on.
+    void pixelbufferblinkstatefill( uint8_t data );
+
+    /// @brief Set all pixels pwm value to the given value.
+    /// @param data 0-255. 0 is fully off, 255 is fully on.
+    void pixelbufferpwmstatefill( uint8_t data );
+
+
+
+
+
 
 
 
@@ -408,7 +427,7 @@ class Pimoroni_11x7matrix {
     /// @return 0-255, interval 46us
     uint8_t audioadcsamplerateget();
 
-    
+
 
 
 
