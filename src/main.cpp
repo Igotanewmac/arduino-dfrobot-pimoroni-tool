@@ -210,8 +210,8 @@ void menucommand_02() {
 
   myledmatrix.writepixelbuffertoframe( 0 );
 
-  uint8_t xpos = 0;
-  uint8_t ypos = 0;
+  uint8_t xpos = 11;
+  uint8_t ypos = 7;
 
   while(1) {
 
