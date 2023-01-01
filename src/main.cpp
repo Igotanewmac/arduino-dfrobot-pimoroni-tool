@@ -42,7 +42,7 @@ uint8_t menumaxchoices = 6;
 String menutext[6] = { "I2C Scan" ,
                        "Test 1" ,
                        "Test 2" ,
-                       "" ,
+                       "Test 3" ,
                        "" ,
                        ""
                        };
@@ -168,7 +168,67 @@ void menucommand_02() {
 
 
 
-void menucommand_03() {};
+void menucommand_03() {
+
+    // bring up the wire library as a master
+  wire.begin();
+
+  // move cursor to home
+  lcd.clear();
+  lcd.setCursor( 0 , 0 );
+
+  Pimoroni_11x7matrix myledmatrix;
+
+  myledmatrix.begin( IS31FL3731_I2C_ADDRESS );
+
+
+  // for each pixel
+  for ( uint8_t xpos = 0 ; xpos < 11 ; xpos++ ) {
+    for ( uint8_t ypos = 0 ; ypos < 7 ; ypos++ ) {
+        myledmatrix.pixelset( xpos , ypos , 1 );
+        myledmatrix.pixelblinkset( xpos , ypos , ypos % 2 );
+        myledmatrix.pixelpwmset( xpos , ypos , 4 );
+    }
+  }
+
+
+
+  myledmatrix.pixelbufferwritealltoframe( 0 );
+  myledmatrix.pixelbufferwritealltoframe( 1 );
+  myledmatrix.pixelbufferwritealltoframe( 2 );
+  myledmatrix.pixelbufferwritealltoframe( 3 );
+  myledmatrix.pixelbufferwritealltoframe( 4 );
+  myledmatrix.pixelbufferwritealltoframe( 5 );
+  myledmatrix.pixelbufferwritealltoframe( 6 );
+  myledmatrix.pixelbufferwritealltoframe( 7 );
+  
+
+  myledmatrix.blinkenableset( 1 );
+
+  myledmatrix.blinkperiodtimeset( 7 );
+
+
+  myledmatrix.breathcontrolenableset( 1 );
+
+  myledmatrix.breathcontrolfadeintimeset( 5 );
+
+  myledmatrix.breathcontrolfadeouttimeset( 5 );
+
+  myledmatrix.breathcontrolextinguishtimeset( 5 );
+
+  myledmatrix.framedisplaypointerset( 1 );
+
+
+  delay( 5000 );
+
+  myledmatrix.framedisplaypointerset( 0 );
+
+  while(1);
+
+
+
+
+};
 
 void menucommand_04() {};
 

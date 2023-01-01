@@ -155,48 +155,48 @@ void Pimoroni_11x7matrix::pixelbufferwritealltoframe( uint8_t framenumber ) {
 
     // write the buffer line by line to map easily
 
-    _chipwritebyte( 0x00 , 0x00 , _ledstate[ 0  ] );
-    _chipwritebyte( 0x00 , 0x02 , _ledstate[ 1  ] );
-    _chipwritebyte( 0x00 , 0x04 , _ledstate[ 2  ] );
-    _chipwritebyte( 0x00 , 0x06 , _ledstate[ 3  ] );
-    _chipwritebyte( 0x00 , 0x08 , _ledstate[ 4  ] );
-    _chipwritebyte( 0x00 , 0x0A , _ledstate[ 5  ] );
-    _chipwritebyte( 0x00 , 0x01 , _ledstate[ 6  ] );
-    _chipwritebyte( 0x00 , 0x03 , _ledstate[ 7  ] );
-    _chipwritebyte( 0x00 , 0x05 , _ledstate[ 8  ] );
-    _chipwritebyte( 0x00 , 0x07 , _ledstate[ 9  ] );
-    _chipwritebyte( 0x00 , 0x09 , _ledstate[ 10 ] );
+    _chipwritebyte( framenumber , 0x00 , _ledstate[ 0  ] );
+    _chipwritebyte( framenumber , 0x02 , _ledstate[ 1  ] );
+    _chipwritebyte( framenumber , 0x04 , _ledstate[ 2  ] );
+    _chipwritebyte( framenumber , 0x06 , _ledstate[ 3  ] );
+    _chipwritebyte( framenumber , 0x08 , _ledstate[ 4  ] );
+    _chipwritebyte( framenumber , 0x0A , _ledstate[ 5  ] );
+    _chipwritebyte( framenumber , 0x01 , _ledstate[ 6  ] );
+    _chipwritebyte( framenumber , 0x03 , _ledstate[ 7  ] );
+    _chipwritebyte( framenumber , 0x05 , _ledstate[ 8  ] );
+    _chipwritebyte( framenumber , 0x07 , _ledstate[ 9  ] );
+    _chipwritebyte( framenumber , 0x09 , _ledstate[ 10 ] );
     
 
     // write the blink state buffer line by line to map easily
 
-    _chipwritebyte( 0x00 , 0x12 , _ledblinkstate[ 0  ] );
-    _chipwritebyte( 0x00 , 0x14 , _ledblinkstate[ 1  ] );
-    _chipwritebyte( 0x00 , 0x16 , _ledblinkstate[ 2  ] );
-    _chipwritebyte( 0x00 , 0x18 , _ledblinkstate[ 3  ] );
-    _chipwritebyte( 0x00 , 0x1A , _ledblinkstate[ 4  ] );
-    _chipwritebyte( 0x00 , 0x1C , _ledblinkstate[ 5  ] );
-    _chipwritebyte( 0x00 , 0x13 , _ledblinkstate[ 6  ] );
-    _chipwritebyte( 0x00 , 0x15 , _ledblinkstate[ 7  ] );
-    _chipwritebyte( 0x00 , 0x17 , _ledblinkstate[ 8  ] );
-    _chipwritebyte( 0x00 , 0x19 , _ledblinkstate[ 9  ] );
-    _chipwritebyte( 0x00 , 0x1B , _ledblinkstate[ 10 ] );
+    _chipwritebyte( framenumber , 0x12 , _ledblinkstate[ 0  ] );
+    _chipwritebyte( framenumber , 0x14 , _ledblinkstate[ 1  ] );
+    _chipwritebyte( framenumber , 0x16 , _ledblinkstate[ 2  ] );
+    _chipwritebyte( framenumber , 0x18 , _ledblinkstate[ 3  ] );
+    _chipwritebyte( framenumber , 0x1A , _ledblinkstate[ 4  ] );
+    _chipwritebyte( framenumber , 0x1C , _ledblinkstate[ 5  ] );
+    _chipwritebyte( framenumber , 0x13 , _ledblinkstate[ 6  ] );
+    _chipwritebyte( framenumber , 0x15 , _ledblinkstate[ 7  ] );
+    _chipwritebyte( framenumber , 0x17 , _ledblinkstate[ 8  ] );
+    _chipwritebyte( framenumber , 0x19 , _ledblinkstate[ 9  ] );
+    _chipwritebyte( framenumber , 0x1B , _ledblinkstate[ 10 ] );
     
 
 
     // write out the pwm state buffer line by line to map easily
 
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x24 + y , _ledpwmstate[ 0  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x34 + y , _ledpwmstate[ 1  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x44 + y , _ledpwmstate[ 2  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x54 + y , _ledpwmstate[ 3  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x64 + y , _ledpwmstate[ 4  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x74 + y , _ledpwmstate[ 5  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x2C + y , _ledpwmstate[ 6  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x3C + y , _ledpwmstate[ 7  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x4C + y , _ledpwmstate[ 8  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x5C + y , _ledpwmstate[ 9  ][ y ] ); }
-    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( 0x00 , 0x6C + y , _ledpwmstate[ 10 ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x24 + y , _ledpwmstate[ 0  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x34 + y , _ledpwmstate[ 1  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x44 + y , _ledpwmstate[ 2  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x54 + y , _ledpwmstate[ 3  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x64 + y , _ledpwmstate[ 4  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x74 + y , _ledpwmstate[ 5  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x2C + y , _ledpwmstate[ 6  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x3C + y , _ledpwmstate[ 7  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x4C + y , _ledpwmstate[ 8  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x5C + y , _ledpwmstate[ 9  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x6C + y , _ledpwmstate[ 10 ][ y ] ); }
 
 
 
@@ -815,7 +815,7 @@ uint8_t Pimoroni_11x7matrix::currentframedisplayget() {
 // 0x08 Breath Control Register 1
 
 /// @brief Sets the fade out time for breath control
-/// @param fadeouttime 0-7. interval 26ms.
+/// @param fadetime 0-7. interval 26ms.
 void Pimoroni_11x7matrix::breathcontrolfadeouttimeset( uint8_t fadetime ) {
     // read out the current byte
     uint8_t tempbyte = _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_BREATH_CONTROL_ONE_REG );
@@ -843,7 +843,7 @@ uint8_t Pimoroni_11x7matrix::breathcontrolfadeouttimeget() {
 
 
 /// @brief Sets the fade in time for breath control.
-/// @param fadeintime 0-7. interval 26ms.
+/// @param fadetime 0-7. interval 26ms.
 void Pimoroni_11x7matrix::breathcontrolfadeintimeset( uint8_t fadetime ) {
     // read out the current byte
     uint8_t tempbyte = _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_BREATH_CONTROL_ONE_REG );
