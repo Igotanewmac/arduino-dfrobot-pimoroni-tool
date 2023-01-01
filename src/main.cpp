@@ -21,7 +21,9 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 
 // include my IS31FL3731 library
-#include <IS31FL3731.h>
+//#include <IS31FL3731.h>
+
+#include <pimoroni_11x7matrix.h>
 
 
 
@@ -102,6 +104,17 @@ void menucommand_02() {
   lcd.clear();
   lcd.setCursor( 0 , 0 );
 
+  Pimoroni_11x7matrix myledmatrix;
+
+  myledmatrix.begin( IS31FL3731_I2C_ADDRESS );
+
+  lcd.print( "SS" );
+
+  myledmatrix.softwareshutdownset( 0 );
+  delay( 10 );
+  myledmatrix.softwareshutdownset( 1 );
+
+  lcd.print( ":OK " );
 
 
   // software shutdown mode
@@ -122,6 +135,12 @@ void menucommand_02() {
   //myledmatrix.write( 0x0B , 0x0A , 0x01 );
 
 
+  lcd.print( "PD" );
+
+  myledmatrix.displaymodeset( 0b00 );
+
+  lcd.print( ":OK " );
+
 
 
 
@@ -139,6 +158,12 @@ void menucommand_02() {
   //myledmatrix.modeset( 0 );
   //myledmatrix.write( 0x0B , 0x00 , 0x00 );
 
+  lcd.print( "FS" );
+
+  myledmatrix.framedisplaypointerset( 0 );
+
+  lcd.print( ":OK" );
+  lcd.setCursor( 0 , 1 );
 
 
   // Frame Select
@@ -177,7 +202,45 @@ void menucommand_02() {
   //}
 
 
-  //while(1);
+
+
+
+  //myledmatrix.pixelset( 1 , 1 , 1 );
+  //myledmatrix.pixelpwmset( 1 , 1 , 4 );
+
+  myledmatrix.writepixelbuffertoframe( 0 );
+
+  uint8_t xpos = 0;
+  uint8_t ypos = 0;
+
+  while(1) {
+
+    // turn off the old led.
+    myledmatrix.pixelset( xpos , ypos , 0 );
+    myledmatrix.pixelpwmset( xpos , ypos , 0 );
+
+    // move to a new one.
+    xpos++;
+
+    if ( xpos == 11 ) {
+      xpos = 0;
+      ypos++;
+    }
+
+    if ( ypos == 7 ) {
+      xpos = 0;
+      ypos = 0;
+    }
+
+    // turn on the new pixel
+    myledmatrix.pixelset( xpos , ypos , 1 );
+    myledmatrix.pixelpwmset( xpos , ypos , 4 );
+
+    myledmatrix.writepixelbuffertoframe( 0 );
+
+    delay( 200 );
+
+  };
 
   
   
