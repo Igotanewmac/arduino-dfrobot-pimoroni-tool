@@ -39,10 +39,10 @@ void Pimoroni_11x7matrix::begin( uint8_t new_i2c_address = 0x75 ) {
     framedisplaypointerset( 0x00 );
 
     // clear the buffers
-    pixelbuffersclearall();
+    pixelbufferclearall();
 
     // now write them out
-    writepixelbuffertoframe( 0x00 );
+    pixelbufferwritealltoframe( 0x00 );
 
     // all done, return to caller.
     return;
@@ -149,7 +149,7 @@ uint8_t Pimoroni_11x7matrix::_chipreadbyte( uint8_t framenumber , uint8_t addres
 
 /// @brief Write the pixel buffer to a frame on the chip.
 /// @param framenumber The number of the frame to write to. 0-7.
-void Pimoroni_11x7matrix::writepixelbuffertoframe( uint8_t framenumber ) {
+void Pimoroni_11x7matrix::pixelbufferwritealltoframe( uint8_t framenumber ) {
 
 
 
@@ -233,7 +233,7 @@ void Pimoroni_11x7matrix::writepixelbuffertoframe( uint8_t framenumber ) {
 
 
 /// @brief Sets the pixel buffers for state, blink and pwm to all zero.
-void Pimoroni_11x7matrix::pixelbuffersclearall() {
+void Pimoroni_11x7matrix::pixelbufferclearall() {
 
     // for each column of pixel buffers
     for ( uint8_t x = 0 ; x < 11 ; x++ ) {
@@ -1073,7 +1073,7 @@ void Pimoroni_11x7matrix::audioadcsamplerateset( uint8_t samplerate ) {
 /// @return 0-255, interval 46us
 uint8_t Pimoroni_11x7matrix::audioadcsamplerateget() {
     return _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_AUDIO_ADC_RATE_REG );
-    
+
 }
 
 

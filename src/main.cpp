@@ -108,107 +108,17 @@ void menucommand_02() {
 
   myledmatrix.begin( IS31FL3731_I2C_ADDRESS );
 
-  lcd.print( "SS" );
-
   myledmatrix.softwareshutdownset( 0 );
   delay( 10 );
   myledmatrix.softwareshutdownset( 1 );
 
-  lcd.print( ":OK " );
-
-
-  // software shutdown mode
-  /*
-  lcd.print( "SS: " );
-  lcd.print( myledmatrix.shutdownget() );
-  lcd.print( ":" );
-  myledmatrix.shutdownset( 1 );
-  lcd.print( myledmatrix.shutdownget() );
-  //while (1);
-  */
-
-  // turn off software shutdown mode
-  //myledmatrix.shutdownset( 0 );
-  //myledmatrix.write( 0x0B , 0x0A , 00 );
-  //delay(10);
-  //myledmatrix.shutdownset( 1 );
-  //myledmatrix.write( 0x0B , 0x0A , 0x01 );
-
-
-  lcd.print( "PD" );
-
   myledmatrix.displaymodeset( 0b00 );
-
-  lcd.print( ":OK " );
-
-
-
-
-  // Picture Display Mode
-  /*
-  lcd.print( "PD: " );
-  lcd.print( myledmatrix.modeget() );
-  lcd.print( ":" );
-  myledmatrix.modeset( 0 );
-  lcd.print( myledmatrix.modeget() );
-  while (1);
-  */
-
-  // Set to picture display mode
-  //myledmatrix.modeset( 0 );
-  //myledmatrix.write( 0x0B , 0x00 , 0x00 );
-
-  lcd.print( "FS" );
 
   myledmatrix.framedisplaypointerset( 0 );
 
-  lcd.print( ":OK" );
-  lcd.setCursor( 0 , 1 );
-
-
-  // Frame Select
-  /*
-  lcd.print( "FS: " );
-  lcd.print( myledmatrix.frameget() );
-  lcd.print( ":" );
-  myledmatrix.frameset( 0 );
-  lcd.print( myledmatrix.frameget() );
-  while (1);
-  */
-
-  // Select frame 0
-  //myledmatrix.frameset( 0 );
-  //myledmatrix.write( 0x0B , 0x01 , 0x00 );
-
-
-
-  // apparently now I can set some led's on???
-  //myledmatrix.write( 0x0B , 0x05 , 0b00000000 );
-
-  // turn everything off in a sensible fashion
-  //for ( uint8_t i = 0 ; i < 0x12 ; i++ ) {
-  //  myledmatrix.write( 0x00 , i , 0x00 );
-  //}
-  //myledmatrix.write( 0x00 , 0x00 , 0xFF );
-
-  // and to the blink controls
-  //for ( uint8_t i = 12 ; i < 0x24 ; i++ ) {
-  //  myledmatrix.write( 0x00 , i , 0x00 );
-  //}
-
-  // and for the pwm controls
-  //for ( uint8_t i = 24 ; i < 0xB4 ; i++ ) {
-  //  myledmatrix.write( 0x00 , i , 0x04 );
-  //}
-
-
-
-
-
-  //myledmatrix.pixelset( 1 , 1 , 1 );
-  //myledmatrix.pixelpwmset( 1 , 1 , 4 );
-
-  myledmatrix.writepixelbuffertoframe( 0 );
+  myledmatrix.pixelbufferclearall();
+  
+  myledmatrix.pixelbufferwritealltoframe( 0 );
 
   uint8_t xpos = 11;
   uint8_t ypos = 7;
@@ -236,7 +146,7 @@ void menucommand_02() {
     myledmatrix.pixelset( xpos , ypos , 1 );
     myledmatrix.pixelpwmset( xpos , ypos , 4 );
 
-    myledmatrix.writepixelbuffertoframe( 0 );
+    myledmatrix.pixelbufferwritealltoframe( 0 );
 
     delay( 20 );
 
