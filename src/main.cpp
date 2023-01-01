@@ -182,15 +182,9 @@ void menucommand_03() {
   myledmatrix.begin( IS31FL3731_I2C_ADDRESS );
 
 
-  // for each pixel
-  for ( uint8_t xpos = 0 ; xpos < 11 ; xpos++ ) {
-    for ( uint8_t ypos = 0 ; ypos < 7 ; ypos++ ) {
-        myledmatrix.pixelset( xpos , ypos , 1 );
-        myledmatrix.pixelblinkset( xpos , ypos , ypos % 2 );
-        myledmatrix.pixelpwmset( xpos , ypos , 4 );
-    }
-  }
-
+  myledmatrix.pixelbufferstatefill( 0xFF );
+  myledmatrix.pixelbufferblinkstatefill( 0x00 );
+  myledmatrix.pixelbufferpwmstatefill( 4 );
 
 
   myledmatrix.pixelbufferwritealltoframe( 0 );
@@ -201,7 +195,8 @@ void menucommand_03() {
   myledmatrix.pixelbufferwritealltoframe( 5 );
   myledmatrix.pixelbufferwritealltoframe( 6 );
   myledmatrix.pixelbufferwritealltoframe( 7 );
-  
+
+
 
   myledmatrix.blinkenableset( 1 );
 

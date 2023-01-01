@@ -212,7 +212,53 @@ void Pimoroni_11x7matrix::pixelbufferwritealltoframe( uint8_t framenumber ) {
 
 
 
+/// @brief Write the pixel state buffer to a frame on the chip.
+/// @param framenubmer The number of the frame to write. 0-7.
+void Pimoroni_11x7matrix::pixelbufferstatewritetoframe( uint8_t framenumber ) {
+    _chipwritebyte( framenumber , 0x00 , _ledstate[ 0  ] );
+    _chipwritebyte( framenumber , 0x02 , _ledstate[ 1  ] );
+    _chipwritebyte( framenumber , 0x04 , _ledstate[ 2  ] );
+    _chipwritebyte( framenumber , 0x06 , _ledstate[ 3  ] );
+    _chipwritebyte( framenumber , 0x08 , _ledstate[ 4  ] );
+    _chipwritebyte( framenumber , 0x0A , _ledstate[ 5  ] );
+    _chipwritebyte( framenumber , 0x01 , _ledstate[ 6  ] );
+    _chipwritebyte( framenumber , 0x03 , _ledstate[ 7  ] );
+    _chipwritebyte( framenumber , 0x05 , _ledstate[ 8  ] );
+    _chipwritebyte( framenumber , 0x07 , _ledstate[ 9  ] );
+    _chipwritebyte( framenumber , 0x09 , _ledstate[ 10 ] );
+}
 
+/// @brief Write the pixel blink state buffer to a frame on the chip.
+/// @param framenumber The number of the frame to write to. 0-7.
+void Pimoroni_11x7matrix::pixelbufferblinkstatewritetoframe( uint8_t framenumber ) {
+    _chipwritebyte( framenumber , 0x12 , _ledblinkstate[ 0  ] );
+    _chipwritebyte( framenumber , 0x14 , _ledblinkstate[ 1  ] );
+    _chipwritebyte( framenumber , 0x16 , _ledblinkstate[ 2  ] );
+    _chipwritebyte( framenumber , 0x18 , _ledblinkstate[ 3  ] );
+    _chipwritebyte( framenumber , 0x1A , _ledblinkstate[ 4  ] );
+    _chipwritebyte( framenumber , 0x1C , _ledblinkstate[ 5  ] );
+    _chipwritebyte( framenumber , 0x13 , _ledblinkstate[ 6  ] );
+    _chipwritebyte( framenumber , 0x15 , _ledblinkstate[ 7  ] );
+    _chipwritebyte( framenumber , 0x17 , _ledblinkstate[ 8  ] );
+    _chipwritebyte( framenumber , 0x19 , _ledblinkstate[ 9  ] );
+    _chipwritebyte( framenumber , 0x1B , _ledblinkstate[ 10 ] );
+}
+
+/// @brief Write the pixel pwm state buffer to a frame on the chip.
+/// @param framenumber The number of the frame to write to. 0-7.
+void Pimoroni_11x7matrix::pixelbufferpwmstatewritetoframe( uint8_t framenumber ) {
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x24 + y , _ledpwmstate[ 0  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x34 + y , _ledpwmstate[ 1  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x44 + y , _ledpwmstate[ 2  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x54 + y , _ledpwmstate[ 3  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x64 + y , _ledpwmstate[ 4  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x74 + y , _ledpwmstate[ 5  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x2C + y , _ledpwmstate[ 6  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x3C + y , _ledpwmstate[ 7  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x4C + y , _ledpwmstate[ 8  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x5C + y , _ledpwmstate[ 9  ][ y ] ); }
+    for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x6C + y , _ledpwmstate[ 10 ][ y ] ); }
+}
 
 
 
@@ -317,6 +363,82 @@ void Pimoroni_11x7matrix::pixelbufferpwmstateclear() {
     // all done, return to caller.
     return;
 }
+
+
+
+
+
+
+
+/// @brief Set all pixels state to the given value.
+/// @param data 0 = off, 1 = on.
+void Pimoroni_11x7matrix::pixelbufferstatefill( uint8_t data ) {
+
+    // for each element in the _ledstate array...
+    for ( uint8_t i = 0 ; i < 11 ; i++ ) {
+
+        // set it to zero.
+        _ledstate[ i ] = data;
+
+    }
+
+    // all done, return to caller.
+    return;
+
+}
+
+/// @brief Set all pixels blink state to the given value
+/// @param data 0 = off, 1 = on.
+void Pimoroni_11x7matrix::pixelbufferblinkstatefill( uint8_t data ) {
+    
+    // for each element in the _ledstate array...
+    for ( uint8_t i = 0 ; i < 11 ; i++ ) {
+
+        // set it to zero.
+        _ledblinkstate[ i ] = data;
+
+    }
+
+    // all done, return to caller.
+    return;
+
+}
+
+/// @brief Set all pixels pwm value to the given value.
+/// @param data 0-255. 0 is fully off, 255 is fully on.
+void Pimoroni_11x7matrix::pixelbufferpwmstatefill( uint8_t data ) {
+    // for each column in the _ledpwmstate array...
+    for ( uint8_t x = 0 ; x < 11 ; x++ ) {
+
+        // for each row in the _ledpwmstate array...
+        for ( uint8_t y = 0 ; y < 7 ; y++ ) {
+
+            // set it to zero.
+            _ledpwmstate[ x ][ y ] = data;
+
+        }
+
+    }
+
+    // all done, return to caller.
+    return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

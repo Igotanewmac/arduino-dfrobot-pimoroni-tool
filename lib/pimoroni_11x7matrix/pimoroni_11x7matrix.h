@@ -100,11 +100,16 @@ class Pimoroni_11x7matrix {
     void pixelbufferwritealltoframe( uint8_t framenumber );
 
 
+    /// @brief Write the pixel state buffer to a frame on the chip.
+    /// @param framenubmer The number of the frame to write. 0-7.
+    void pixelbufferstatewritetoframe( uint8_t framenumber );
 
-    void pixelbufferstatewritetoframe( uint8_t framenubmer );
-
+    /// @brief Write the pixel blink state buffer to a frame on the chip.
+    /// @param framenumber The number of the frame to write to. 0-7.
     void pixelbufferblinkstatewritetoframe( uint8_t framenumber );
 
+    /// @brief Write the pixel pwm state buffer to a frame on the chip.
+    /// @param framenumber The number of the frame to write to. 0-7.
     void pixelbufferpwmstatewritetoframe( uint8_t framenumber );
 
 
