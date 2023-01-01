@@ -108,17 +108,17 @@ void menucommand_02() {
 
   myledmatrix.begin( IS31FL3731_I2C_ADDRESS );
 
-  myledmatrix.softwareshutdownset( 0 );
+  myledmatrix.softwareShutdownSet( 0 );
   delay( 10 );
-  myledmatrix.softwareshutdownset( 1 );
+  myledmatrix.softwareShutdownSet( 1 );
 
-  myledmatrix.displaymodeset( 0b00 );
+  myledmatrix.displayModeSet( 0b00 );
 
-  myledmatrix.framedisplaypointerset( 0 );
+  myledmatrix.frameDisplayPointerSet( 0 );
 
-  myledmatrix.pixelbufferclearall();
+  myledmatrix.pixelBufferClearAll();
   
-  myledmatrix.pixelbufferwritealltoframe( 0 );
+  myledmatrix.pixelBufferWriteAllToFrame( 0 );
 
   uint8_t xpos = 11;
   uint8_t ypos = 7;
@@ -126,8 +126,8 @@ void menucommand_02() {
   while(1) {
 
     // turn off the old led.
-    myledmatrix.pixelset( xpos , ypos , 0 );
-    myledmatrix.pixelpwmset( xpos , ypos , 0 );
+    myledmatrix.pixelSet( xpos , ypos , 0 );
+    myledmatrix.pixelpwmSet( xpos , ypos , 0 );
 
     // move to a new one.
     xpos++;
@@ -143,10 +143,10 @@ void menucommand_02() {
     }
 
     // turn on the new pixel
-    myledmatrix.pixelset( xpos , ypos , 1 );
-    myledmatrix.pixelpwmset( xpos , ypos , 4 );
+    myledmatrix.pixelSet( xpos , ypos , 1 );
+    myledmatrix.pixelpwmSet( xpos , ypos , 4 );
 
-    myledmatrix.pixelbufferwritealltoframe( 0 );
+    myledmatrix.pixelBufferWriteAllToFrame( 0 );
 
     delay( 20 );
 
@@ -182,41 +182,41 @@ void menucommand_03() {
   myledmatrix.begin( IS31FL3731_I2C_ADDRESS );
 
 
-  myledmatrix.pixelbufferstatefill( 0xFF );
-  myledmatrix.pixelbufferblinkstatefill( 0x00 );
-  myledmatrix.pixelbufferpwmstatefill( 4 );
+  myledmatrix.pixelBufferStateFill( 0xFF );
+  myledmatrix.pixelBufferBlinkStateFill( 0x00 );
+  myledmatrix.pixelBufferpwmStateFill( 4 );
 
 
-  myledmatrix.pixelbufferwritealltoframe( 0 );
-  myledmatrix.pixelbufferwritealltoframe( 1 );
-  myledmatrix.pixelbufferwritealltoframe( 2 );
-  myledmatrix.pixelbufferwritealltoframe( 3 );
-  myledmatrix.pixelbufferwritealltoframe( 4 );
-  myledmatrix.pixelbufferwritealltoframe( 5 );
-  myledmatrix.pixelbufferwritealltoframe( 6 );
-  myledmatrix.pixelbufferwritealltoframe( 7 );
+  myledmatrix.pixelBufferWriteAllToFrame( 0 );
+  myledmatrix.pixelBufferWriteAllToFrame( 1 );
+  myledmatrix.pixelBufferWriteAllToFrame( 2 );
+  myledmatrix.pixelBufferWriteAllToFrame( 3 );
+  myledmatrix.pixelBufferWriteAllToFrame( 4 );
+  myledmatrix.pixelBufferWriteAllToFrame( 5 );
+  myledmatrix.pixelBufferWriteAllToFrame( 6 );
+  myledmatrix.pixelBufferWriteAllToFrame( 7 );
 
 
 
-  myledmatrix.blinkenableset( 1 );
+  myledmatrix.blinkEnableSet( 1 );
 
-  myledmatrix.blinkperiodtimeset( 7 );
+  myledmatrix.blinkPeriodTimeSet( 7 );
 
 
-  myledmatrix.breathcontrolenableset( 1 );
+  myledmatrix.breathControlEnableSet( 1 );
 
-  myledmatrix.breathcontrolfadeintimeset( 5 );
+  myledmatrix.breathControlFadeInTimeSet( 5 );
 
-  myledmatrix.breathcontrolfadeouttimeset( 5 );
+  myledmatrix.breathControlFadeOutTimeSet( 5 );
 
-  myledmatrix.breathcontrolextinguishtimeset( 5 );
+  myledmatrix.breathControlExtinguishTimeSet( 5 );
 
-  myledmatrix.framedisplaypointerset( 1 );
+  myledmatrix.frameDisplayPointerSet( 1 );
 
 
   delay( 5000 );
 
-  myledmatrix.framedisplaypointerset( 0 );
+  myledmatrix.frameDisplayPointerSet( 0 );
 
   while(1);
 
