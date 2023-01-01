@@ -134,7 +134,7 @@ uint8_t Pimoroni_11x7matrix::_chipreadbyte( uint8_t framenumber , uint8_t addres
 /// @param state The state to set as a uint8_t. 0 = shutdown, 1 = normal operation.
 void Pimoroni_11x7matrix::softwareshutdownset( uint8_t state ) {
 
-    _chipwritebyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_SOFTWARESHUTDOWN , state );
+    _chipwritebyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_SOFTWARESHUTDOWN_REG , state );
 
 }
 
@@ -142,7 +142,7 @@ void Pimoroni_11x7matrix::softwareshutdownset( uint8_t state ) {
 /// @return the flag as a uint8_t. 0 = shutdown, 1 = normal operation.
 uint8_t Pimoroni_11x7matrix::softwareshutdownget() {
 
-    return _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_SOFTWARESHUTDOWN );
+    return _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_SOFTWARESHUTDOWN_REG );
 
 }
 
@@ -153,13 +153,13 @@ void Pimoroni_11x7matrix::displaymodeset( uint8_t mode ) {
 
 
     // read out the current byte
-    uint8_t tempbyte = _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER );
+    uint8_t tempbyte = _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REG );
 
     // add in my data
     tempbyte &= 0b11100111;
     tempbyte |= ( mode << 3 );
 
-    _chipwritebyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER , tempbyte );
+    _chipwritebyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REG , tempbyte );
 
     // all done, return to caller.
     return;
@@ -176,7 +176,7 @@ void Pimoroni_11x7matrix::displaymodeset( uint8_t mode ) {
 /// @return The current display mode number as a uint8_t. 0b00 = picture mode, 0b01 = auto frame play, 0b1x = audio frame play.
 uint8_t Pimoroni_11x7matrix::displaymodeget() {
 
-    uint8_t tempbyte = _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REGISTER );
+    uint8_t tempbyte = _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_CONFIG_REG );
 
     // get our data out
     tempbyte &= 0b00011000;

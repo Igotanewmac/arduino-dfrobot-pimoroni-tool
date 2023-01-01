@@ -238,7 +238,7 @@ void menucommand_02() {
 
     myledmatrix.writepixelbuffertoframe( 0 );
 
-    delay( 200 );
+    delay( 20 );
 
   };
 
