@@ -94,6 +94,18 @@ class Pimoroni_11x7matrix {
 
 
 
+    /// @brief The last frame number we switched to.  0-7, 0b for control page.
+    uint8_t _currentframe;
+
+    /// @brief Switch to a different frame, if necessary.
+    /// @param framenumber The frame number to switch to.
+    void _switchFrame( uint8_t framenumber );
+
+
+
+
+
+
 
 
 

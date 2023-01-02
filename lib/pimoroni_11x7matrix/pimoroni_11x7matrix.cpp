@@ -59,15 +59,7 @@ void Pimoroni_11x7matrix::begin( uint8_t new_i2c_address = 0x75 ) {
 void Pimoroni_11x7matrix::_chipwritebyte( uint8_t framenumber , uint8_t address , uint8_t data ) {
 
 
-    // say hello to the chip
-    wire.beginTransmission( _i2c_address );
-
-    // send the frame number
-    wire.write( 0xFD );
-    wire.write( framenumber );
-
-    // say goodbye to the chip.
-    wire.endTransmission();
+    _switchFrame( framenumber );
 
     // say hello to the chip again...
     wire.beginTransmission( _i2c_address );
@@ -93,15 +85,7 @@ void Pimoroni_11x7matrix::_chipwritebyte( uint8_t framenumber , uint8_t address 
 /// @return The data byte rturned from the chip as a uint8_t.
 uint8_t Pimoroni_11x7matrix::_chipreadbyte( uint8_t framenumber , uint8_t address ) {
 
-    // say hello to the chip
-    wire.beginTransmission( _i2c_address );
-
-    // send the frame number
-    wire.write( 0xFD );
-    wire.write( framenumber );
-
-    // say goodbye to the chip.
-    wire.endTransmission();
+    _switchFrame( framenumber );
 
     // say hello to the chip again...
     wire.beginTransmission( _i2c_address );
@@ -137,15 +121,7 @@ uint8_t Pimoroni_11x7matrix::_chipreadbyte( uint8_t framenumber , uint8_t addres
 /// @param framenumber The frame number to write to.
 void Pimoroni_11x7matrix::_pixelBufferStateFastWrite( uint8_t framenumber ) {
 
-    // say hello to the chip
-    wire.beginTransmission( _i2c_address );
-
-    // send the frame number
-    wire.write( 0xFD );
-    wire.write( framenumber );
-
-    // say goodbye to the chip.
-    wire.endTransmission();
+    _switchFrame( framenumber );
 
     // say hello to the chip again...
     wire.beginTransmission( _i2c_address );
@@ -181,15 +157,8 @@ void Pimoroni_11x7matrix::_pixelBufferStateFastWrite( uint8_t framenumber ) {
 /// @brief Optimised write to chip.
 /// @param framenumber The frame number to write to.
 void Pimoroni_11x7matrix::_pixelBufferBlinkStateFastWrite( uint8_t framenumber ) {
-    // say hello to the chip
-    wire.beginTransmission( _i2c_address );
-
-    // send the frame number
-    wire.write( 0xFD );
-    wire.write( framenumber );
-
-    // say goodbye to the chip.
-    wire.endTransmission();
+    
+    _switchFrame( framenumber );
 
     // say hello to the chip again...
     wire.beginTransmission( _i2c_address );
@@ -224,15 +193,7 @@ void Pimoroni_11x7matrix::_pixelBufferBlinkStateFastWrite( uint8_t framenumber )
 /// @param  framenumber The frame number to write to.
 void Pimoroni_11x7matrix::_pixelBufferpwmStateFastWrite( uint8_t framenumber ) {
 
-    // say hello to the chip
-    wire.beginTransmission( _i2c_address );
-
-    // send the frame number
-    wire.write( 0xFD );
-    wire.write( framenumber );
-
-    // say goodbye to the chip.
-    wire.endTransmission();
+    _switchFrame( framenumber );
 
     
    
@@ -386,6 +347,26 @@ void Pimoroni_11x7matrix::_pixelBufferpwmStateFastWrite( uint8_t framenumber ) {
 
 
 
+/// @brief Switch to a different frame, if necessary.
+/// @param framenumber The frame number to switch to.
+void Pimoroni_11x7matrix::_switchFrame( uint8_t framenumber ) {
+
+    // check if we need to switch at all?
+    if ( framenumber == _currentframe ) { return; }
+
+    // ok, we need to switch now, perform an i2c transaction.
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0xFD );
+    wire.write( framenumber );
+    wire.endTransmission();
+
+    // now update our current frame number
+    _currentframe = framenumber;
+
+    // all done, return to caller.
+    return;
+    
+}
 
 
 
@@ -398,6 +379,19 @@ void Pimoroni_11x7matrix::_pixelBufferpwmStateFastWrite( uint8_t framenumber ) {
 
 
 
+
+
+
+
+
+
+
+
+/*
+
+********************* public methods below.
+
+*/
 
 
 
