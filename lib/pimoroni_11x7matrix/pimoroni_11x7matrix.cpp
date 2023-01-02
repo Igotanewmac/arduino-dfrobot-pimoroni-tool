@@ -1025,7 +1025,7 @@ uint8_t Pimoroni_11x7matrix::breathControlEnableGet() {
 }
 
 
-/// @brief Sets the extinguish time for the Breath Control system.
+/// @brief Sets the time off, between fade out and fade in, for the Breath Control system.
 /// @param fadetime 0-7. interval 3.5ms.
 void Pimoroni_11x7matrix::breathControlExtinguishTimeSet( uint8_t fadetime ) {
     // read out the current byte
@@ -1041,7 +1041,7 @@ void Pimoroni_11x7matrix::breathControlExtinguishTimeSet( uint8_t fadetime ) {
     return;
 }
 
-/// @brief Gets the extinguish time from the Breath Control system.
+/// @brief Gets the time off, between fade out and fade on, from the Breath Control system.
 /// @return 0-7. interval 3.5ms
 uint8_t Pimoroni_11x7matrix::breathControlExtinguishTimeGet() {
     uint8_t tempbyte = _chipreadbyte( IS31FL3731_PAGE_CONTROL , IS31FL3731_ADDRESS_BREATH_CONTROL_TWO_REG );

@@ -48,6 +48,9 @@ String menutext[6] = { "I2C Scan" ,
                        };
 
 
+
+
+// i2c scanner
 void menucommand_00() {
 
   lcd.clear();
@@ -148,7 +151,7 @@ void menucommand_02() {
 
     myledmatrix.pixelBufferWriteAllToFrame( 0 );
 
-    delay( 20 );
+    //delay( 10 );
 
   };
 
@@ -182,43 +185,66 @@ void menucommand_03() {
   myledmatrix.begin( IS31FL3731_I2C_ADDRESS );
 
 
-  myledmatrix.pixelBufferStateFill( 0xFF );
   myledmatrix.pixelBufferBlinkStateFill( 0x00 );
   myledmatrix.pixelBufferpwmStateFill( 4 );
 
 
+  myledmatrix.pixelBufferStateFill( 0x01 );
   myledmatrix.pixelBufferWriteAllToFrame( 0 );
+  
+  myledmatrix.pixelBufferStateFill( 0x02 );
   myledmatrix.pixelBufferWriteAllToFrame( 1 );
+  
+  myledmatrix.pixelBufferStateFill( 0x03 );
   myledmatrix.pixelBufferWriteAllToFrame( 2 );
+  
+  myledmatrix.pixelBufferStateFill( 0x04 );
   myledmatrix.pixelBufferWriteAllToFrame( 3 );
+  
+  myledmatrix.pixelBufferStateFill( 0x05 );
   myledmatrix.pixelBufferWriteAllToFrame( 4 );
+  
+  myledmatrix.pixelBufferStateFill( 0x06 );
   myledmatrix.pixelBufferWriteAllToFrame( 5 );
+  
+  myledmatrix.pixelBufferStateFill( 0x07 );
   myledmatrix.pixelBufferWriteAllToFrame( 6 );
+  
+  myledmatrix.pixelBufferStateFill( 0x08 );
   myledmatrix.pixelBufferWriteAllToFrame( 7 );
 
 
 
-  myledmatrix.blinkEnableSet( 1 );
+  myledmatrix.blinkEnableSet( 0 );
 
-  myledmatrix.blinkPeriodTimeSet( 7 );
+  // myledmatrix.blinkPeriodTimeSet( 7 );
 
 
   myledmatrix.breathControlEnableSet( 1 );
 
-  myledmatrix.breathControlFadeInTimeSet( 5 );
+  myledmatrix.breathControlFadeInTimeSet( 1 );
 
-  myledmatrix.breathControlFadeOutTimeSet( 5 );
+  myledmatrix.breathControlFadeOutTimeSet( 1 );
 
-  myledmatrix.breathControlExtinguishTimeSet( 5 );
+  myledmatrix.breathControlExtinguishTimeSet( 1 );
 
   myledmatrix.frameDisplayPointerSet( 1 );
 
 
-  delay( 5000 );
+  uint8_t framecounter = 0;
 
-  myledmatrix.frameDisplayPointerSet( 0 );
+  while (1) {
+  
 
-  while(1);
+  myledmatrix.frameDisplayPointerSet( framecounter );
+
+  delay( 10000 );
+
+  framecounter++;
+
+  if ( framecounter == 8 ) { framecounter = 0; }
+
+  }
 
 
 
