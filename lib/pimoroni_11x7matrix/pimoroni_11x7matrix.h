@@ -359,11 +359,11 @@ class Pimoroni_11x7matrix {
     uint8_t breathControlEnableGet();
 
 
-    /// @brief Sets the extinguish time for the Breath Control system.
+    /// @brief Sets the time off, between fade out and fade in, for the Breath Control system.
     /// @param fadetime 0-7. interval 3.5ms.
     void breathControlExtinguishTimeSet( uint8_t fadetime );
 
-    /// @brief Gets the extinguish time from the Breath Control system.
+    /// @brief Gets the time off, between fade out and fade in, for the Breath Control system.
     /// @return 0-7. interval 3.5ms
     uint8_t breathControlExtinguishTimeGet();
 
