@@ -272,42 +272,55 @@ void menucommand_04() {
   // the data sheet says so?
   myledmatrix.softwareShutdownSet( 0 );
 
+
   myledmatrix.pixelBufferBlinkStateFill( 0x00 );
   myledmatrix.pixelBufferpwmStateFill( 4 );
 
 
-  myledmatrix.pixelBufferStateFill( 0x01 );
+  myledmatrix.pixelBufferStateFill( 0xFF );
+  myledmatrix.pixelBufferBlinkStateFill( 0x00 );
   myledmatrix.pixelBufferWriteAllToFrame( 0 );
   
-  myledmatrix.pixelBufferStateFill( 0x02 );
+  myledmatrix.pixelBufferStateFill( 0xFF );
+  myledmatrix.pixelBufferBlinkStateFill( 0xFF );
   myledmatrix.pixelBufferWriteAllToFrame( 1 );
   
-  myledmatrix.pixelBufferStateFill( 0x03 );
+  myledmatrix.pixelBufferStateFill( 0xAA );
+  myledmatrix.pixelBufferBlinkStateFill( 0x00 );
   myledmatrix.pixelBufferWriteAllToFrame( 2 );
   
-  myledmatrix.pixelBufferStateFill( 0x04 );
+  myledmatrix.pixelBufferStateFill( 0x55 );
+  myledmatrix.pixelBufferBlinkStateFill( 0x00 );
   myledmatrix.pixelBufferWriteAllToFrame( 3 );
   
-  myledmatrix.pixelBufferStateFill( 0x05 );
+  myledmatrix.pixelBufferStateFill( 0xFF );
+  myledmatrix.pixelBufferBlinkStateFill( 0x00 );
   myledmatrix.pixelBufferWriteAllToFrame( 4 );
   
-  myledmatrix.pixelBufferStateFill( 0x06 );
+  myledmatrix.pixelBufferStateFill( 0xFF );
+  myledmatrix.pixelBufferBlinkStateFill( 0x00 );
+  myledmatrix.pixelBufferpwmStateFill( 0x02 );
   myledmatrix.pixelBufferWriteAllToFrame( 5 );
   
-  myledmatrix.pixelBufferStateFill( 0x07 );
+
+  myledmatrix.pixelBufferStateFill( 0xFF );
+  myledmatrix.pixelBufferBlinkStateFill( 0x00 );
+  myledmatrix.pixelBufferpwmStateFill( 0x04 );
   myledmatrix.pixelBufferWriteAllToFrame( 6 );
   
-  myledmatrix.pixelBufferStateFill( 0x08 );
+  myledmatrix.pixelBufferStateFill( 0xFF );
+  myledmatrix.pixelBufferBlinkStateFill( 0x00 );
+  myledmatrix.pixelBufferpwmStateFill( 0x08 );
   myledmatrix.pixelBufferWriteAllToFrame( 7 );
 
 
 
-  myledmatrix.blinkEnableSet( 0 );
+  myledmatrix.blinkEnableSet( 1 );
 
-  // myledmatrix.blinkPeriodTimeSet( 7 );
+  myledmatrix.blinkPeriodTimeSet( 1 );
 
 
-  myledmatrix.breathControlEnableSet( 1 );
+  myledmatrix.breathControlEnableSet( 0 );
 
   myledmatrix.breathControlFadeInTimeSet( 3 );
 

@@ -133,6 +133,118 @@ uint8_t Pimoroni_11x7matrix::_chipreadbyte( uint8_t framenumber , uint8_t addres
 
 
 
+/// @brief Optimised write to chip.
+/// @param framenumber The frame number to write to.
+void Pimoroni_11x7matrix::_pixelBufferStateFastWrite( uint8_t framenumber ) {
+
+    // say hello to the chip
+    wire.beginTransmission( _i2c_address );
+
+    // send the frame number
+    wire.write( 0xFD );
+    wire.write( framenumber );
+
+    // say goodbye to the chip.
+    wire.endTransmission();
+
+    // say hello to the chip again...
+    wire.beginTransmission( _i2c_address );
+
+
+    // send the base address 0x00 for pixel state data
+    wire.write( 0x00 );
+
+    // now send the pixel array in the right sequence
+    wire.write( _ledstate[ 0  ] ); // 0x00
+    wire.write( _ledstate[ 6  ] ); // 0x01
+    wire.write( _ledstate[ 1  ] ); // 0x02
+    wire.write( _ledstate[ 7  ] ); // 0x03
+    wire.write( _ledstate[ 2  ] ); // 0x04
+    wire.write( _ledstate[ 8  ] ); // 0x05
+    wire.write( _ledstate[ 3  ] ); // 0x06
+    wire.write( _ledstate[ 9  ] ); // 0x07
+    wire.write( _ledstate[ 4  ] ); // 0x08
+    wire.write( _ledstate[ 10 ] ); // 0x09
+    wire.write( _ledstate[ 5  ] ); // 0x0A
+
+
+    // say goodbye
+    wire.endTransmission();
+
+    // all done, return to caller
+    return;
+
+
+}
+
+
+/// @brief Optimised write to chip.
+/// @param framenumber The frame number to write to.
+void Pimoroni_11x7matrix::_pixelBufferBlinkStateFastWrite( uint8_t framenumber ) {
+    // say hello to the chip
+    wire.beginTransmission( _i2c_address );
+
+    // send the frame number
+    wire.write( 0xFD );
+    wire.write( framenumber );
+
+    // say goodbye to the chip.
+    wire.endTransmission();
+
+    // say hello to the chip again...
+    wire.beginTransmission( _i2c_address );
+
+
+    // send the base address 0x00 for pixel state data
+    wire.write( 0x12 );
+
+    // now send the pixel array in the right sequence
+    wire.write( _ledblinkstate[ 0  ] ); // 0x00
+    wire.write( _ledblinkstate[ 6  ] ); // 0x01
+    wire.write( _ledblinkstate[ 1  ] ); // 0x02
+    wire.write( _ledblinkstate[ 7  ] ); // 0x03
+    wire.write( _ledblinkstate[ 2  ] ); // 0x04
+    wire.write( _ledblinkstate[ 8  ] ); // 0x05
+    wire.write( _ledblinkstate[ 3  ] ); // 0x06
+    wire.write( _ledblinkstate[ 9  ] ); // 0x07
+    wire.write( _ledblinkstate[ 4  ] ); // 0x08
+    wire.write( _ledblinkstate[ 10 ] ); // 0x09
+    wire.write( _ledblinkstate[ 5  ] ); // 0x0A
+
+
+    // say goodbye
+    wire.endTransmission();
+
+    // all done, return to caller
+    return;
+}
+
+
+/// @brief Optimised write to chip.
+/// @param  framenumber The frame number to write to.
+void Pimoroni_11x7matrix::_pixelBufferpwmStateFastWrite( uint8_t framenumber ) {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -154,7 +266,7 @@ void Pimoroni_11x7matrix::pixelBufferWriteAllToFrame( uint8_t framenumber ) {
 
 
     // write the buffer line by line to map easily
-
+    /*
     _chipwritebyte( framenumber , 0x00 , _ledstate[ 0  ] );
     _chipwritebyte( framenumber , 0x02 , _ledstate[ 1  ] );
     _chipwritebyte( framenumber , 0x04 , _ledstate[ 2  ] );
@@ -166,7 +278,9 @@ void Pimoroni_11x7matrix::pixelBufferWriteAllToFrame( uint8_t framenumber ) {
     _chipwritebyte( framenumber , 0x05 , _ledstate[ 8  ] );
     _chipwritebyte( framenumber , 0x07 , _ledstate[ 9  ] );
     _chipwritebyte( framenumber , 0x09 , _ledstate[ 10 ] );
-    
+    */
+
+   _pixelBufferStateFastWrite( framenumber );
 
     // write the blink state buffer line by line to map easily
 
@@ -215,6 +329,8 @@ void Pimoroni_11x7matrix::pixelBufferWriteAllToFrame( uint8_t framenumber ) {
 /// @brief Write the pixel state buffer to a frame on the chip.
 /// @param framenubmer The number of the frame to write. 0-7.
 void Pimoroni_11x7matrix::pixelBufferStateWriteToFrame( uint8_t framenumber ) {
+
+    /*
     _chipwritebyte( framenumber , 0x00 , _ledstate[ 0  ] );
     _chipwritebyte( framenumber , 0x02 , _ledstate[ 1  ] );
     _chipwritebyte( framenumber , 0x04 , _ledstate[ 2  ] );
@@ -226,6 +342,10 @@ void Pimoroni_11x7matrix::pixelBufferStateWriteToFrame( uint8_t framenumber ) {
     _chipwritebyte( framenumber , 0x05 , _ledstate[ 8  ] );
     _chipwritebyte( framenumber , 0x07 , _ledstate[ 9  ] );
     _chipwritebyte( framenumber , 0x09 , _ledstate[ 10 ] );
+    */
+
+   _pixelBufferStateFastWrite( framenumber );
+    
 }
 
 /// @brief Write the pixel blink state buffer to a frame on the chip.
