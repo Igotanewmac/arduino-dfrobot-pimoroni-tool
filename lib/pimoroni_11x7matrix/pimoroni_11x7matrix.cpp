@@ -27,11 +27,9 @@ void Pimoroni_11x7matrix::begin( uint8_t new_i2c_address = 0x75 ) {
     // store my i2c address for later.
     _i2c_address = new_i2c_address;
 
-    // restart the chip
+    // turn off the chip
     softwareShutdownSet( 0 );
-    delay(10);
-    softwareShutdownSet( 1 );
-
+    
     // set to picture display mode
     displayModeSet( 0x00 );
 
@@ -44,6 +42,9 @@ void Pimoroni_11x7matrix::begin( uint8_t new_i2c_address = 0x75 ) {
     // now write them out
     pixelBufferWriteAllToFrame( 0x00 );
 
+    // now turn the chip back on.
+    softwareShutdownSet( 1 );
+    
     // all done, return to caller.
     return;
 
