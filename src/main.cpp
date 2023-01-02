@@ -43,7 +43,7 @@ String menutext[6] = { "I2C Scan" ,
                        "Test 1" ,
                        "Test 2" ,
                        "Test 3" ,
-                       "" ,
+                       "Test 4" ,
                        ""
                        };
 
@@ -222,12 +222,13 @@ void menucommand_03() {
 
   myledmatrix.breathControlEnableSet( 1 );
 
-  myledmatrix.breathControlFadeInTimeSet( 1 );
-
-  myledmatrix.breathControlFadeOutTimeSet( 1 );
+  myledmatrix.breathControlFadeInTimeSet( 3 );
 
   myledmatrix.breathControlExtinguishTimeSet( 1 );
 
+  myledmatrix.breathControlFadeOutTimeSet( 3 );
+
+  
   myledmatrix.frameDisplayPointerSet( 1 );
 
 
@@ -238,7 +239,7 @@ void menucommand_03() {
 
   myledmatrix.frameDisplayPointerSet( framecounter );
 
-  delay( 10000 );
+  delay( 2500 );
 
   framecounter++;
 
@@ -251,7 +252,103 @@ void menucommand_03() {
 
 };
 
-void menucommand_04() {};
+void menucommand_04() {
+
+
+
+    // bring up the wire library as a master
+  wire.begin();
+
+  // move cursor to home
+  lcd.clear();
+  lcd.setCursor( 0 , 0 );
+
+  Pimoroni_11x7matrix myledmatrix;
+
+  myledmatrix.begin( IS31FL3731_I2C_ADDRESS );
+
+
+  // can I turn the software control off and still access the registers?
+  // the data sheet says so?
+  myledmatrix.softwareShutdownSet( 0 );
+
+  myledmatrix.pixelBufferBlinkStateFill( 0x00 );
+  myledmatrix.pixelBufferpwmStateFill( 4 );
+
+
+  myledmatrix.pixelBufferStateFill( 0x01 );
+  myledmatrix.pixelBufferWriteAllToFrame( 0 );
+  
+  myledmatrix.pixelBufferStateFill( 0x02 );
+  myledmatrix.pixelBufferWriteAllToFrame( 1 );
+  
+  myledmatrix.pixelBufferStateFill( 0x03 );
+  myledmatrix.pixelBufferWriteAllToFrame( 2 );
+  
+  myledmatrix.pixelBufferStateFill( 0x04 );
+  myledmatrix.pixelBufferWriteAllToFrame( 3 );
+  
+  myledmatrix.pixelBufferStateFill( 0x05 );
+  myledmatrix.pixelBufferWriteAllToFrame( 4 );
+  
+  myledmatrix.pixelBufferStateFill( 0x06 );
+  myledmatrix.pixelBufferWriteAllToFrame( 5 );
+  
+  myledmatrix.pixelBufferStateFill( 0x07 );
+  myledmatrix.pixelBufferWriteAllToFrame( 6 );
+  
+  myledmatrix.pixelBufferStateFill( 0x08 );
+  myledmatrix.pixelBufferWriteAllToFrame( 7 );
+
+
+
+  myledmatrix.blinkEnableSet( 0 );
+
+  // myledmatrix.blinkPeriodTimeSet( 7 );
+
+
+  myledmatrix.breathControlEnableSet( 1 );
+
+  myledmatrix.breathControlFadeInTimeSet( 3 );
+
+  myledmatrix.breathControlExtinguishTimeSet( 1 );
+
+  myledmatrix.breathControlFadeOutTimeSet( 3 );
+
+  
+  
+
+  // set up an animation on the chip.
+  myledmatrix.frameDisplayPointerSet( 0 );
+
+
+  // starting frame
+  myledmatrix.autoplayFrameStartSet( 0 );
+
+  // frames playing selection
+  // 7 for 7 frames, to land on 8
+  myledmatrix.autoplayNumberOfFramesPlayingSet( 0 );
+
+  // number of loops
+  myledmatrix.autoplayNumberOfLoopsSet( 0 );
+
+
+  // frame display time
+  myledmatrix.autoplayFrameDelayTimeSet( 0 );
+
+
+  // switch to animating mode
+  myledmatrix.displayModeSet( 0b01 );
+
+
+
+  // now turn the chip on
+  myledmatrix.softwareShutdownSet( 1 );
+
+  // now wait.
+  //while(1);
+
+};
 
 void menucommand_05() {};
 
