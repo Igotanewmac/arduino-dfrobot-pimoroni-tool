@@ -75,6 +75,30 @@ class Pimoroni_11x7matrix {
     
     
     
+
+
+    /// @brief Optimised write to chip.
+    /// @param framenumber The frame number to write to.
+    void _pixelBufferStateFastWrite( uint8_t framenumber );
+
+
+    /// @brief Optimised write to chip.
+    /// @param framenumber The frame number to write to.
+    void _pixelBufferBlinkStateFastWrite( uint8_t framenumber );
+
+
+    /// @brief Optimised write to chip.
+    /// @param  framenumber The frame number to write to.
+    void _pixelBufferpwmStateFastWrite( uint8_t framenumber );
+
+
+
+
+
+
+
+
+
     public:
 
     /// @brief Constructor for Pimoroni 11x7 Matrix Driver
