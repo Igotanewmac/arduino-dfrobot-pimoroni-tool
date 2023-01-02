@@ -224,6 +224,173 @@ void Pimoroni_11x7matrix::_pixelBufferBlinkStateFastWrite( uint8_t framenumber )
 /// @param  framenumber The frame number to write to.
 void Pimoroni_11x7matrix::_pixelBufferpwmStateFastWrite( uint8_t framenumber ) {
 
+    // say hello to the chip
+    wire.beginTransmission( _i2c_address );
+
+    // send the frame number
+    wire.write( 0xFD );
+    wire.write( framenumber );
+
+    // say goodbye to the chip.
+    wire.endTransmission();
+
+    
+
+    
+    // now send the pixel array in the right sequence
+    /*
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x24 );
+    wire.write( _ledpwmstate[ 0 ][ 0 ] );
+    wire.write( _ledpwmstate[ 0 ][ 1 ] );
+    wire.write( _ledpwmstate[ 0 ][ 2 ] );
+    wire.write( _ledpwmstate[ 0 ][ 3 ] );
+    wire.write( _ledpwmstate[ 0 ][ 4 ] );
+    wire.write( _ledpwmstate[ 0 ][ 5 ] );
+    wire.write( _ledpwmstate[ 0 ][ 6 ] );
+    wire.endTransmission();
+    */
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x24 + y , _ledpwmstate[ 0  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x24 );
+    wire.write( _ledpwmstate[ 0 ][ 0 ] );
+    wire.write( _ledpwmstate[ 0 ][ 1 ] );
+    wire.write( _ledpwmstate[ 0 ][ 2 ] );
+    wire.write( _ledpwmstate[ 0 ][ 3 ] );
+    wire.write( _ledpwmstate[ 0 ][ 4 ] );
+    wire.write( _ledpwmstate[ 0 ][ 5 ] );
+    wire.write( _ledpwmstate[ 0 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x2C + y , _ledpwmstate[ 6  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x2C );
+    wire.write( _ledpwmstate[ 6 ][ 0 ] );
+    wire.write( _ledpwmstate[ 6 ][ 1 ] );
+    wire.write( _ledpwmstate[ 6 ][ 2 ] );
+    wire.write( _ledpwmstate[ 6 ][ 3 ] );
+    wire.write( _ledpwmstate[ 6 ][ 4 ] );
+    wire.write( _ledpwmstate[ 6 ][ 5 ] );
+    wire.write( _ledpwmstate[ 6 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x34 + y , _ledpwmstate[ 1  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x34 );
+    wire.write( _ledpwmstate[ 1 ][ 0 ] );
+    wire.write( _ledpwmstate[ 1 ][ 1 ] );
+    wire.write( _ledpwmstate[ 1 ][ 2 ] );
+    wire.write( _ledpwmstate[ 1 ][ 3 ] );
+    wire.write( _ledpwmstate[ 1 ][ 4 ] );
+    wire.write( _ledpwmstate[ 1 ][ 5 ] );
+    wire.write( _ledpwmstate[ 1 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x3C + y , _ledpwmstate[ 7  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x3C );
+    wire.write( _ledpwmstate[ 7 ][ 0 ] );
+    wire.write( _ledpwmstate[ 7 ][ 1 ] );
+    wire.write( _ledpwmstate[ 7 ][ 2 ] );
+    wire.write( _ledpwmstate[ 7 ][ 3 ] );
+    wire.write( _ledpwmstate[ 7 ][ 4 ] );
+    wire.write( _ledpwmstate[ 7 ][ 5 ] );
+    wire.write( _ledpwmstate[ 7 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x44 + y , _ledpwmstate[ 2  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x44 );
+    wire.write( _ledpwmstate[ 2 ][ 0 ] );
+    wire.write( _ledpwmstate[ 2 ][ 1 ] );
+    wire.write( _ledpwmstate[ 2 ][ 2 ] );
+    wire.write( _ledpwmstate[ 2 ][ 3 ] );
+    wire.write( _ledpwmstate[ 2 ][ 4 ] );
+    wire.write( _ledpwmstate[ 2 ][ 5 ] );
+    wire.write( _ledpwmstate[ 2 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x4C + y , _ledpwmstate[ 8  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x4C );
+    wire.write( _ledpwmstate[ 8 ][ 0 ] );
+    wire.write( _ledpwmstate[ 8 ][ 1 ] );
+    wire.write( _ledpwmstate[ 8 ][ 2 ] );
+    wire.write( _ledpwmstate[ 8 ][ 3 ] );
+    wire.write( _ledpwmstate[ 8 ][ 4 ] );
+    wire.write( _ledpwmstate[ 8 ][ 5 ] );
+    wire.write( _ledpwmstate[ 8 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x54 + y , _ledpwmstate[ 3  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x54 );
+    wire.write( _ledpwmstate[ 3 ][ 0 ] );
+    wire.write( _ledpwmstate[ 3 ][ 1 ] );
+    wire.write( _ledpwmstate[ 3 ][ 2 ] );
+    wire.write( _ledpwmstate[ 3 ][ 3 ] );
+    wire.write( _ledpwmstate[ 3 ][ 4 ] );
+    wire.write( _ledpwmstate[ 3 ][ 5 ] );
+    wire.write( _ledpwmstate[ 3 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x5C + y , _ledpwmstate[ 9  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x5C );
+    wire.write( _ledpwmstate[ 9 ][ 0 ] );
+    wire.write( _ledpwmstate[ 9 ][ 1 ] );
+    wire.write( _ledpwmstate[ 9 ][ 2 ] );
+    wire.write( _ledpwmstate[ 9 ][ 3 ] );
+    wire.write( _ledpwmstate[ 9 ][ 4 ] );
+    wire.write( _ledpwmstate[ 9 ][ 5 ] );
+    wire.write( _ledpwmstate[ 9 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x64 + y , _ledpwmstate[ 4  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x64 );
+    wire.write( _ledpwmstate[ 4 ][ 0 ] );
+    wire.write( _ledpwmstate[ 4 ][ 1 ] );
+    wire.write( _ledpwmstate[ 4 ][ 2 ] );
+    wire.write( _ledpwmstate[ 4 ][ 3 ] );
+    wire.write( _ledpwmstate[ 4 ][ 4 ] );
+    wire.write( _ledpwmstate[ 4 ][ 5 ] );
+    wire.write( _ledpwmstate[ 4 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x6C + y , _ledpwmstate[ 10 ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x6C );
+    wire.write( _ledpwmstate[ 10 ][ 0 ] );
+    wire.write( _ledpwmstate[ 10 ][ 1 ] );
+    wire.write( _ledpwmstate[ 10 ][ 2 ] );
+    wire.write( _ledpwmstate[ 10 ][ 3 ] );
+    wire.write( _ledpwmstate[ 10 ][ 4 ] );
+    wire.write( _ledpwmstate[ 10 ][ 5 ] );
+    wire.write( _ledpwmstate[ 10 ][ 6 ] );
+    wire.endTransmission();
+
+    // for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x74 + y , _ledpwmstate[ 5  ][ y ] ); }
+    wire.beginTransmission( _i2c_address );
+    wire.write( 0x74 );
+    wire.write( _ledpwmstate[ 5 ][ 0 ] );
+    wire.write( _ledpwmstate[ 5 ][ 1 ] );
+    wire.write( _ledpwmstate[ 5 ][ 2 ] );
+    wire.write( _ledpwmstate[ 5 ][ 3 ] );
+    wire.write( _ledpwmstate[ 5 ][ 4 ] );
+    wire.write( _ledpwmstate[ 5 ][ 5 ] );
+    wire.write( _ledpwmstate[ 5 ][ 6 ] );
+    wire.endTransmission();
+
+
+
+
+
+    // all done, return to caller
+    return;
+
+
 }
 
 
@@ -283,7 +450,7 @@ void Pimoroni_11x7matrix::pixelBufferWriteAllToFrame( uint8_t framenumber ) {
    _pixelBufferStateFastWrite( framenumber );
 
     // write the blink state buffer line by line to map easily
-
+    /*
     _chipwritebyte( framenumber , 0x12 , _ledblinkstate[ 0  ] );
     _chipwritebyte( framenumber , 0x14 , _ledblinkstate[ 1  ] );
     _chipwritebyte( framenumber , 0x16 , _ledblinkstate[ 2  ] );
@@ -295,11 +462,13 @@ void Pimoroni_11x7matrix::pixelBufferWriteAllToFrame( uint8_t framenumber ) {
     _chipwritebyte( framenumber , 0x17 , _ledblinkstate[ 8  ] );
     _chipwritebyte( framenumber , 0x19 , _ledblinkstate[ 9  ] );
     _chipwritebyte( framenumber , 0x1B , _ledblinkstate[ 10 ] );
-    
+    */
+
+    _pixelBufferBlinkStateFastWrite( framenumber );
 
 
     // write out the pwm state buffer line by line to map easily
-
+    /*
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x24 + y , _ledpwmstate[ 0  ][ y ] ); }
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x34 + y , _ledpwmstate[ 1  ][ y ] ); }
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x44 + y , _ledpwmstate[ 2  ][ y ] ); }
@@ -311,7 +480,8 @@ void Pimoroni_11x7matrix::pixelBufferWriteAllToFrame( uint8_t framenumber ) {
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x4C + y , _ledpwmstate[ 8  ][ y ] ); }
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x5C + y , _ledpwmstate[ 9  ][ y ] ); }
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x6C + y , _ledpwmstate[ 10 ][ y ] ); }
-
+    */
+   _pixelBufferpwmStateFastWrite( framenumber );
 
 
     // now all done, return to caller.
@@ -351,6 +521,7 @@ void Pimoroni_11x7matrix::pixelBufferStateWriteToFrame( uint8_t framenumber ) {
 /// @brief Write the pixel blink state buffer to a frame on the chip.
 /// @param framenumber The number of the frame to write to. 0-7.
 void Pimoroni_11x7matrix::pixelBufferBlinkStateWriteToFrame( uint8_t framenumber ) {
+    /*
     _chipwritebyte( framenumber , 0x12 , _ledblinkstate[ 0  ] );
     _chipwritebyte( framenumber , 0x14 , _ledblinkstate[ 1  ] );
     _chipwritebyte( framenumber , 0x16 , _ledblinkstate[ 2  ] );
@@ -362,11 +533,14 @@ void Pimoroni_11x7matrix::pixelBufferBlinkStateWriteToFrame( uint8_t framenumber
     _chipwritebyte( framenumber , 0x17 , _ledblinkstate[ 8  ] );
     _chipwritebyte( framenumber , 0x19 , _ledblinkstate[ 9  ] );
     _chipwritebyte( framenumber , 0x1B , _ledblinkstate[ 10 ] );
+    */
+   _pixelBufferBlinkStateFastWrite( framenumber );
 }
 
 /// @brief Write the pixel pwm state buffer to a frame on the chip.
 /// @param framenumber The number of the frame to write to. 0-7.
 void Pimoroni_11x7matrix::pixelBufferpwmStateWriteToFrame( uint8_t framenumber ) {
+    /*
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x24 + y , _ledpwmstate[ 0  ][ y ] ); }
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x34 + y , _ledpwmstate[ 1  ][ y ] ); }
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x44 + y , _ledpwmstate[ 2  ][ y ] ); }
@@ -378,6 +552,8 @@ void Pimoroni_11x7matrix::pixelBufferpwmStateWriteToFrame( uint8_t framenumber )
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x4C + y , _ledpwmstate[ 8  ][ y ] ); }
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x5C + y , _ledpwmstate[ 9  ][ y ] ); }
     for ( uint8_t y = 0 ; y < 7 ; y++ ) { _chipwritebyte( framenumber , 0x6C + y , _ledpwmstate[ 10 ][ y ] ); }
+    */
+    _pixelBufferpwmStateFastWrite( framenumber );
 }
 
 

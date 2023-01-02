@@ -107,22 +107,34 @@ void menucommand_02() {
   lcd.clear();
   lcd.setCursor( 0 , 0 );
 
+  // create the object.
   Pimoroni_11x7matrix myledmatrix;
 
+  // initialise the chip.
   myledmatrix.begin( IS31FL3731_I2C_ADDRESS );
 
+  // turn it off
   myledmatrix.softwareShutdownSet( 0 );
-  delay( 10 );
-  myledmatrix.softwareShutdownSet( 1 );
-
+  
+  // switch to static picture mode.
   myledmatrix.displayModeSet( 0b00 );
 
+  // switch to frame 0
   myledmatrix.frameDisplayPointerSet( 0 );
 
+  // clear all the pixel buffers to zero.
   myledmatrix.pixelBufferClearAll();
   
+  // fill the pwm state buffer with 0x04 for a dim light.
+  myledmatrix.pixelBufferpwmStateFill( 0x04 );
+  
+  // write all the pixel buffers to the chip to frame 0.
   myledmatrix.pixelBufferWriteAllToFrame( 0 );
 
+  // now turn the chip back on...
+  myledmatrix.softwareShutdownSet( 1 );
+
+  
   uint8_t xpos = 11;
   uint8_t ypos = 7;
 
@@ -130,7 +142,6 @@ void menucommand_02() {
 
     // turn off the old led.
     myledmatrix.pixelSet( xpos , ypos , 0 );
-    myledmatrix.pixelpwmSet( xpos , ypos , 0 );
 
     // move to a new one.
     xpos++;
@@ -147,11 +158,11 @@ void menucommand_02() {
 
     // turn on the new pixel
     myledmatrix.pixelSet( xpos , ypos , 1 );
-    myledmatrix.pixelpwmSet( xpos , ypos , 4 );
 
-    myledmatrix.pixelBufferWriteAllToFrame( 0 );
-
-    //delay( 10 );
+    // update the device
+    myledmatrix.pixelBufferStateWriteToFrame( 0 );
+    
+    delay( 10 );
 
   };
 
