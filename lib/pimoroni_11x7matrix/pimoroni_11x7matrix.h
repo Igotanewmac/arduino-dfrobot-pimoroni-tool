@@ -48,7 +48,7 @@ class Pimoroni_11x7matrix {
 
     private:
 
-    /// @brief The pixel buffer for the on/pff state.
+    /// @brief The pixel buffer for the on/off state.
     uint8_t _ledstate[11];
 
     /// @brief The pixel buffer for the blink on/off state.

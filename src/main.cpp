@@ -44,7 +44,7 @@ String menutext[6] = { "I2C Scan" ,
                        "Test 2" ,
                        "Test 3" ,
                        "Test 4" ,
-                       ""
+                       "Test 5"
                        };
 
 
@@ -126,7 +126,7 @@ void menucommand_02() {
   myledmatrix.pixelBufferClearAll();
   
   // fill the pwm state buffer with 0x04 for a dim light.
-  myledmatrix.pixelBufferpwmStateFill( 0x04 );
+  myledmatrix.pixelBufferpwmStateFill( 0xFF );
   
   // write all the pixel buffers to the chip to frame 0.
   myledmatrix.pixelBufferWriteAllToFrame( 0 );
@@ -134,37 +134,15 @@ void menucommand_02() {
   // now turn the chip back on...
   myledmatrix.softwareShutdownSet( 1 );
 
+  // turn on the new pixel
+  myledmatrix.pixelSet( 0 , 0 , 1 );
+
+  // update the device
+  myledmatrix.pixelBufferStateWriteToFrame( 0 );
   
-  uint8_t xpos = 11;
-  uint8_t ypos = 7;
+  delay( 1000 );
 
-  while(1) {
-
-    // turn off the old led.
-    myledmatrix.pixelSet( xpos , ypos , 0 );
-
-    // move to a new one.
-    xpos++;
-
-    if ( xpos == 11 ) {
-      xpos = 0;
-      ypos++;
-    }
-
-    if ( ypos == 7 ) {
-      xpos = 0;
-      ypos = 0;
-    }
-
-    // turn on the new pixel
-    myledmatrix.pixelSet( xpos , ypos , 1 );
-
-    // update the device
-    myledmatrix.pixelBufferStateWriteToFrame( 0 );
-    
-    delay( 10 );
-
-  };
+  
 
   
   
@@ -373,6 +351,8 @@ void menucommand_04() {
   //while(1);
 
 };
+
+
 
 void menucommand_05() {};
 
